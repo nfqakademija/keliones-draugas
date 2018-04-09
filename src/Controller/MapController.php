@@ -18,7 +18,6 @@ class MapController extends Controller
      	// dump($repository->findAll());
      	// die;
 
-
      	return $this->render('map.html.twig');
      }
 

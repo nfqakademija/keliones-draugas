@@ -84,8 +84,8 @@ docker exec -it php.symfony bash
   ```
 
 * Pasižiūrime rezultatą.
-Atsidarome naršyklėje [symfony.local](http://symfony.local)
-
+Atsidarome naršyklėje [symfony.local:8080](http://symfony.local:8080)
+SSL [https://symfony.local:8443](https://symfony.local:8443)
 
 ### Projekto paleidimas (palyginimui kaip atrodytų produkcinėje)
 
@@ -130,7 +130,7 @@ docker exec -it php.symfony bash
   ```
 
 * Pasižiūrime rezultatą.
-Atsidarome naršyklėje [symfony.prod](http://symfony.prod)
+Atsidarome naršyklėje [symfony.prod:8080](http://symfony.prod:8080)
 
 P.S. šalia galima atsidaryti ir palyginti su `symfony.local`
 

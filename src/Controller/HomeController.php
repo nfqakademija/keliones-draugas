@@ -4,16 +4,21 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/crud")
+     * @Method({"GET"})
      */
-    public function index()
+    public function indexAction()
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        $koordinates = [ 'koord 1', 'koord 2'];
+        return $this->render('crud.html.twig',array('koordinates' => $koordinates)
+           );
     }
+
 }

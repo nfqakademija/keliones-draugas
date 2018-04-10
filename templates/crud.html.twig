@@ -1,0 +1,24 @@
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        {% endblock %}
+
+        {% block body %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>koordinates</th>
+                    <th>veiksmai</th>
+                    </tr>
+            </thead>
+            <tbody>
+                {% for koord in koordinates %}
+                <tr>
+                    <td>{{ koord }}</td>
+                    <td><a href="#" class="btn btn-primary"></a>show</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% endblock %}

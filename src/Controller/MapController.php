@@ -15,9 +15,6 @@ class MapController extends Controller
       */
      public function mapAction(CoordinateRepository $repository)
      {
-     	// dump($repository->findAll());
-     	// die;
-
      	return $this->render('map.html.twig');
      }
 

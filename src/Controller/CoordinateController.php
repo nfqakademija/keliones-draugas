@@ -14,7 +14,6 @@ class CoordinateController extends Controller
      /**
      * @Route("/coordinate")
       */
-
      public function showCoordinateAction(CoordinateRepository $repository)
      {
         $coordArray = array();

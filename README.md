@@ -38,7 +38,7 @@ bin/console assets:install
 ```bash
 bin/console doctrine:database:drop --if-exists --force
 bin/console doctrine:database:create --if-not-exists
-bin/cosnole doctrine:migrations:migrate --no-interaction
+bin/console doctrine:migrations:migrate --no-interaction
 bin/console doctrine:fixtures:load --no-interaction --append
 ```
 

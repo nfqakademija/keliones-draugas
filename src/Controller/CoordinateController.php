@@ -17,10 +17,6 @@ class CoordinateController extends Controller
 
      public function showCoordinateAction(CoordinateRepository $repository)
      {
-
-     	// dump($repository->findAll());
-     	// die;
-
         $coordArray = array();
         foreach ($repository->findAll() as $coordinate) {
             $tempArray = array(
@@ -29,12 +25,9 @@ class CoordinateController extends Controller
                 'latitude' => $coordinate->getLatitude(),
                 'longitude' => $coordinate->getLongitude(),
                 );
-            array_push($coordArray, $tempArray);
-
+            $coordArray[] = $tempArray;
         }
-        // dump($coordArray);
-        return new JsonResponse($coordArray);
-        return $this->render('coordinate.html.twig');   	
+        return new JsonResponse($coordArray); 	
     }
 
 }

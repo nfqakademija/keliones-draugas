@@ -1,3 +1,5 @@
+/project.tar.gz
+/.deploy/*.retry
 
 ###> symfony/framework-bundle ###
 /.env

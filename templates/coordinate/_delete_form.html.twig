@@ -1,5 +1,7 @@
-<form method="post" action="{{ path('coordinate_delete', {'id': coordinate.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ coordinate.id) }}">
-    <button class="btn">Delete</button>
-</form>
+<div class="mt-1">
+    <form method="post" action="{{ path('coordinate_delete', {'id': coordinate.id}) }}" onsubmit="return confirm('Ar tikrai norite ištrinti šią koordinatę?');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ coordinate.id) }}">
+        <button class="btn btn-secondary">Ištrinti</button>
+    </form>
+</div>

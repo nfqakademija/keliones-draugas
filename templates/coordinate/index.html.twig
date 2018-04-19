@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Koordinačių sąrašas{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="m-4">Koordinačių sąrašas</h1>
+
+        <a class="btn btn-primary m-3" href="{{ path('coordinate_new') }}">Kurti naują koordinatę</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Pavadinimas</th>
+                    <th>Adresas</th>
+                    <th>Platuma (latitude)</th>
+                    <th>Ilguma (longitude)</th>
+                    <th>Veiksmai</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for coordinate in coordinates %}
+                <tr>
+                    <td>{{ coordinate.id }}</td>
+                    <td>{{ coordinate.name }}</td>
+                    <td>{{ coordinate.address }}</td>
+                    <td>{{ coordinate.latitude }}</td>
+                    <td>{{ coordinate.longitude }}</td>
+                    <td>
+                        <a href="{{ path('coordinate_show', {'id': coordinate.id}) }}">Išsamiau</a>
+                        <span> | </span>
+                        <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Redaguoti</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

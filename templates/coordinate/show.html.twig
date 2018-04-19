@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Koordinatė{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ coordinate.name }}</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ coordinate.id }}</td>
+                </tr>
+                <tr>
+                    <th>Pavadinimas</th>
+                    <td>{{ coordinate.name }}</td>
+                </tr>
+                <tr>
+                    <th>Adresas</th>
+                    <td>{{ coordinate.address }}</td>
+                </tr>
+                <tr>
+                    <th>Platuma (latitude)</th>
+                    <td>{{ coordinate.latitude }}</td>
+                </tr>
+                <tr>
+                    <th>Ilguma (longitude)</th>
+                    <td>{{ coordinate.longitude }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-secondary" href="{{ path('coordinate_index') }}">Atgal į sąrašą</a>
+        <a class="btn btn-secondary" href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Redaguoti</a>
+
+        {{ include('coordinate/_delete_form.html.twig') }}
+
+
+    </div>
+
+{% endblock %}

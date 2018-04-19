@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Redaguoti koordinatę{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Redaguoti koordinatę</h1>
+
+        {{ include('coordinate/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('coordinate_index') }}">Atgal į sąrašą</a>
+
+        {{ include('coordinate/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

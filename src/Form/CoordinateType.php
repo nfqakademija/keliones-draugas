@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Coordinate;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +17,10 @@ class CoordinateType extends AbstractType
             ->add('address')
             ->add('latitude')
             ->add('longitude')
+            ->add('coordinateType', EntityType::class, array(
+                'class' => \App\Entity\CoordinateType::class,
+                'choice_label' => 'type',
+            ))
         ;
     }
 

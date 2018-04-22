@@ -142,14 +142,22 @@ googleMapsLoader.load(function(google){
             infoWindow.open(map);
             map.setCenter(pos);
         }, function() {
-            var pos = {
-                lat: 54.687157,
-                lng: 25.279652
-            };
-            infoWindow.open(map);
-            map.setCenter(pos);
+            $.getJSON('https://geoip-db.com/json/')
+                .done (function(location) {
+                    var pos = {
+                        lat: location.latitude,
+                        lng: location.longitude,
+                    };
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                });
+
         });
     }
+
+
+
+
 
 
     map.mapTypes.set('styled_map', styledMapType);

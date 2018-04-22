@@ -23,6 +23,7 @@ class MapCoordinateController extends Controller
                 'address' => $coordinate->getAddress(),
                 'latitude' => $coordinate->getLatitude(),
                 'longitude' => $coordinate->getLongitude(),
+                'id' => $coordinate->getId(),
                 );
             $coordArray[] = $tempArray;
         }

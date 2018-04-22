@@ -142,6 +142,12 @@ googleMapsLoader.load(function(google){
             infoWindow.open(map);
             map.setCenter(pos);
         }, function() {
+            var pos = {
+                lat: 54.687157,
+                lng: 25.279652
+            };
+            infoWindow.open(map);
+            map.setCenter(pos);
         });
     }
 

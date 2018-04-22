@@ -160,9 +160,14 @@ googleMapsLoader.load(function(google){
                 map: map
             });
 
+            var url = "/coordinate/" + data[i].id;
+            var infoWindowContent = "<h5>" + data[i].name + "</h5>" +
+                                    "<div><a href="+url+">Plačiau</a></div>"
+            ;
+
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(data[i].address);
+                    infowindow.setContent(infoWindowContent);
                     infowindow.open(map, marker);
                 }
             })(marker, i));

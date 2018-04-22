@@ -11,7 +11,7 @@ use App\Repository\CoordinateRepository;
 class MapController extends Controller
 {
      /**
-     * @Route("/map")
+     * @Route("/")
       */
      public function mapAction(CoordinateRepository $repository)
      {

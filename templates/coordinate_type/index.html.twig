@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CoordinateType index{% endblock %}
+
+{% block body %}
+    <h1>CoordinateType index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coordinate_type in coordinate_types %}
+            <tr>
+                <td>{{ coordinate_type.id }}</td>
+                <td>{{ coordinate_type.type }}</td>
+                <td>
+                    <a href="{{ path('coordinate_type_show', {'id': coordinate_type.id}) }}">show</a>
+                    <a href="{{ path('coordinate_type_edit', {'id': coordinate_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('coordinate_type_new') }}">Create new</a>
+{% endblock %}

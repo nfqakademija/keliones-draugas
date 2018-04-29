@@ -160,10 +160,6 @@ googleMapsLoader.load(function(google){
     }
 
 
-
-
-
-
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
@@ -172,6 +168,7 @@ googleMapsLoader.load(function(google){
         var infowindow = new google.maps.InfoWindow();
 
         var marker, i;
+        var infoWindowContent = [];
         for (i = 0; i < data.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
@@ -179,13 +176,12 @@ googleMapsLoader.load(function(google){
             });
 
             var url = "/coordinate/" + data[i].id;
-            var infoWindowContent = "<h5>" + data[i].name + "</h5>" +
-                                    "<div><a href="+url+">Plačiau</a></div>"
-            ;
+            infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
+                "<div><a href="+url+">Plačiau</a></div>";
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(infoWindowContent);
+                    infowindow.setContent(infoWindowContent[i]);
                     infowindow.open(map, marker);
                 }
             })(marker, i));

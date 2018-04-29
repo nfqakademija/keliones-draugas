@@ -168,7 +168,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setName('IKI Antakalnis-2');
         $coordinate->setAddress('Nemenčinės pl. 2, Vilnius 10103');
         $coordinate->setLatitude('54.724224');
-        $coordinate->setLongitude('5.3177139');
+        $coordinate->setLongitude('25.3177139');
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);

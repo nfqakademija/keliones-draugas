@@ -39,22 +39,22 @@ class Coordinate
     /**
      * @ORM\Column(type="boolean", length=255)
      */
-    private $validation;
+    private $validated;
 
     /**
      * @return mixed
      */
-    public function getValidation()
+    public function getValidated()
     {
-        return $this->validation;
+        return $this->validated;
     }
 
     /**
-     * @param mixed $validation
+     * @param mixed $validated
      */
-    public function setValidation($validation): void
+    public function setValidated($validated): void
     {
-        $this->validation = $validation;
+        $this->validated = $validated;
     }
 
     /**

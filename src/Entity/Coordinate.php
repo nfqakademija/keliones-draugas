@@ -42,7 +42,7 @@ class Coordinate
     private $validated;
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getValidated()
     {
@@ -52,7 +52,7 @@ class Coordinate
     /**
      * @param mixed $validated
      */
-    public function setValidated($validated): void
+    public function setValidated(bool $validated): void
     {
         $this->validated = $validated;
     }

@@ -16,7 +16,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Priegliaus g. 1, Vilnius 06269');
         $coordinate->setLatitude('54.7098987');
         $coordinate->setLongitude('25.1851605');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -26,7 +26,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Šeškinės g. 32, Vilnius 07157');
         $coordinate->setLatitude('54.7155273');
         $coordinate->setLongitude('25.2432311');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -36,7 +36,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Parodų g. 1A, 04215 Vilnius');
         $coordinate->setLatitude('54.6734191');
         $coordinate->setLongitude('25.2219382');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -46,7 +46,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Viršuliškių g. 40, Vilnius 05112');
         $coordinate->setLatitude('54.708046');
         $coordinate->setLongitude('25.2254403');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -56,7 +56,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Parodų g. 1A, 04215 Vilnius');
         $coordinate->setLatitude('54.6734191');
         $coordinate->setLongitude('25.2219382');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -66,7 +66,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('KM. K. Čiurlionio 84, Vilnius 03100');
         $coordinate->setLatitude('54.6818721');
         $coordinate->setLongitude('25.2484853');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -76,7 +76,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Konstitucijos pr. 21, 08130 Vilnius');
         $coordinate->setLatitude('54.6981808');
         $coordinate->setLongitude('25.2687508');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -86,7 +86,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Kedrų g. 4, Vilnius 03116');
         $coordinate->setLatitude('54.675484');
         $coordinate->setLongitude('25.2546494');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -96,7 +96,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Mindaugo g. 25, Vilnius 03214');
         $coordinate->setLatitude('54.6732299');
         $coordinate->setLongitude('25.2724761');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -106,7 +106,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Upės g. 21, 08128 Vilnius');
         $coordinate->setLatitude('54.695601');
         $coordinate->setLongitude('25.2576826');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -116,7 +116,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Konstitucijos pr. 29, Vilnius 08105');
         $coordinate->setLatitude('54.6995679');
         $coordinate->setLongitude('25.226166');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -126,7 +126,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Žalgirio g. 135, 08217 Vilnius');
         $coordinate->setLatitude('54.7048838');
         $coordinate->setLongitude('25.2694691');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -136,7 +136,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Žalgirio g. 90, 09303 Vilnius');
         $coordinate->setLatitude('54.703708');
         $coordinate->setLongitude('25.2759581');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -146,7 +146,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Jeruzalės g. 4, Vilnius 08420');
         $coordinate->setLatitude('54.7401342');
         $coordinate->setLongitude('25.272418');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -156,7 +156,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Žirmūnų g. 64, Vilnius 09131');
         $coordinate->setLatitude('54.7123504');
         $coordinate->setLongitude('25.2999408');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -166,7 +166,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Didlaukio g. 80A, Vilnius 08326');
         $coordinate->setLatitude('54.7288717');
         $coordinate->setLongitude('25.2671024');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -176,7 +176,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Juozo Balčikonio g. 3, 08247 Vilnius');
         $coordinate->setLatitude('54.7194348');
         $coordinate->setLongitude('25.2817066');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -186,7 +186,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Nemenčinės pl. 2, Vilnius 10103');
         $coordinate->setLatitude('54.724224');
         $coordinate->setLongitude('25.3177139');
-        $coordinate->setValidated('true');
+        $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
@@ -196,7 +196,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setAddress('Saulėtekio al. 43, Vilnius 10227');
         $coordinate->setLatitude('54.7221331');
         $coordinate->setLongitude('25.342193');
-        $coordinate->setValidated('false');
+        $coordinate->setValidated(false);
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);

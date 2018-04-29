@@ -37,6 +37,27 @@ class Coordinate
     private $longitude;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $validation;
+
+    /**
+     * @return mixed
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * @param mixed $validation
+     */
+    public function setValidation($validation): void
+    {
+        $this->validation = $validation;
+    }
+
+    /**
      * @var CoordinateType
      * @ORM\ManyToOne(targetEntity="App\Entity\CoordinateType", inversedBy="coordinates")
      * @ORM\JoinColumn(nullable=false)

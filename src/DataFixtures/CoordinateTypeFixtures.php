@@ -1,9 +1,6 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: AI
- * Date: 22/04/2018
- * Time: 18:04
  */
 
 namespace App\DataFixtures;

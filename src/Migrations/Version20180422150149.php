@@ -19,6 +19,8 @@ class Version20180422150149 extends AbstractMigration
         $this->addSql('ALTER TABLE coordinate ADD coordinate_type_id INT NOT NULL');
         $this->addSql('ALTER TABLE coordinate ADD CONSTRAINT FK_CB9CBA17B71E4AC0 FOREIGN KEY (coordinate_type_id) REFERENCES coordinate_type (id)');
         $this->addSql('CREATE INDEX IDX_CB9CBA17B71E4AC0 ON coordinate (coordinate_type_id)');
+        $this->addSql('ALTER TABLE coordinate ADD validation VARCHAR(225) NOT NULL');
+
     }
 
     public function down(Schema $schema)

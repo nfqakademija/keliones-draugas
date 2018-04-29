@@ -11,6 +11,21 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+    
+    /**
+     * @param array $roles
+     */
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")

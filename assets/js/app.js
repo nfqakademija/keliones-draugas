@@ -119,7 +119,7 @@ googleMapsLoader.load(function(google){
                 stylers: [{color: '#92998d'}]
             }
         ],
-        {name: 'Rozeciu taskai'}
+        {name: 'Paslaugų tiekėjai'}
     );
 
     var map = new google.maps.Map(document.getElementById('googleMap'), {

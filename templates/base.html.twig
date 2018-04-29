@@ -1,65 +1,58 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+    {% include 'partials/header.html.twig' %}
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>Travel Mate</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-
-
-    </head>
     <body>
 
 
         <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand js-scroll-trigger" href="/">Travel Mate</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fa fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
+
+
+                        {% if app.user %}
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+                            <a class="nav-link js-scroll-trigger" href="/logout">Log Out</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+                            <a class="nav-link js-scroll-trigger" href="/coordinate">Coordinates</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                        </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="/login">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="/register">Register</a>
+                            </li>
+                        {% endif %}
+
+
                     </ul>
                 </div>
             </div>
         </nav>
 
+
+
         {% block body %}
 
         {% endblock %}
 
+
+        {% include 'partials/footer.html.twig' %}
+
         {% block javascripts %}
             <script src="{{ asset('build/js/app.js') }}"></script>
         {% endblock %}
-
-        <div class="text-center">"Kelionės draugas" 2018</div>
     </body>
+
 
 
 </html>

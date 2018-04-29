@@ -17,7 +17,7 @@ class User extends BaseUser
     {
         return $this->roles;
     }
-    
+
     /**
      * @param array $roles
      */

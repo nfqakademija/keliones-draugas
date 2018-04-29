@@ -37,7 +37,7 @@ class Coordinate
     private $longitude;
 
     /**
-     * @ORM\Column(type="boolean", length=255)
+     * @ORM\Column(type="boolean")
      */
     private $validated;
 

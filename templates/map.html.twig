@@ -3,7 +3,7 @@
 
         {% block body %}
 
-            <div id="googleMap" style="width:100%;height:400px;"></div>
+            <div id="googleMap" style="width:100%;height:600px;"></div>
 
             <section id="services">
                 <div class="container">
@@ -17,30 +17,47 @@
                         <div class="col-md-4">
                             <span class="fa-stack fa-4x">
                               <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                              <i class="fa fa-filter fa-stack-1x fa-inverse"></i>
                             </span>
-                            <h4 class="service-heading">E-Commerce</h4>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                            <h4 class="service-heading">Filter</h4>
+                            <p class="text-muted">Use filters. Find charging places for your EV, mobile phone, tablet…</p>
                         </div>
                         <div class="col-md-4">
                             <span class="fa-stack fa-4x">
                               <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                            <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
                             </span>
-                            <h4 class="service-heading">Responsive Design</h4>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                            <h4 class="service-heading">Add</h4>
+                            <p class="text-muted">Add new charging stations as you discover them.</p>
                         </div>
                         <div class="col-md-4">
                             <span class="fa-stack fa-4x">
                               <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                              <i class="fa fa-share-alt fa-stack-1x fa-inverse"></i>
                             </span>
-                            <h4 class="service-heading">Web Security</h4>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                            <h4 class="service-heading">Share</h4>
+                            <p class="text-muted">Share details of new charging points with community</p>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-star fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <h4 class="service-heading">Rate</h4>
+                            <p class="text-muted">See ratings, photos, and descriptions. Add reviews and tips.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="fa-stack fa-4x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-comments fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <h4 class="service-heading">Conect</h4>
+                            <p class="text-muted">Message fellow travelers: a great way to coordinate sharing a charger.</p>
                         </div>
                     </div>
                 </div>
             </section>
-
+            <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+            </script>
 
         {% endblock %}

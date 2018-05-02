@@ -17,8 +17,12 @@ class CoordinateTypeFixtures extends Fixture
     {
         $coordinateType = new CoordinateType();
         $coordinateType->setType("electric cars");
-
         $this->addReference('ecectric_cars', $coordinateType);
+
+        $manager->persist($coordinateType);
+
+        $coordinateType->setType("public");
+        $this->addReference('public', $coordinateType);
 
         $manager->persist($coordinateType);
         $manager->flush();

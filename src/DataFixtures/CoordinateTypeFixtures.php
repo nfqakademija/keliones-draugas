@@ -21,6 +21,7 @@ class CoordinateTypeFixtures extends Fixture
 
         $manager->persist($coordinateType);
 
+        $coordinateType = new CoordinateType();
         $coordinateType->setType("public");
         $this->addReference('public', $coordinateType);
 

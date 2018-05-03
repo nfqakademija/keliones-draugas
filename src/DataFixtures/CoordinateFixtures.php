@@ -200,6 +200,131 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate->setCoordinateType($this->getReference('ecectric_cars'));
 
         $manager->persist($coordinate);
+
+        //public
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Caffeine LT');
+        $coordinate->setAddress('Vilniaus g. 31, Vilnius 01102');
+        $coordinate->setLatitude('54.6671223');
+        $coordinate->setLongitude('25.2214263');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Caffeine LT');
+        $coordinate->setAddress('Vilniaus g. 17, Vilnius 01402');
+        $coordinate->setLatitude('54.6847306');
+        $coordinate->setLongitude('25.2687229');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Caffeine LT');
+        $coordinate->setAddress('Pilies g. 3, Vilnius 01123');
+        $coordinate->setLatitude('54.6671223');
+        $coordinate->setLongitude('25.2214263');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Caffeine LT');
+        $coordinate->setAddress('Gedimino pr. 52, Vilnius 01110');
+        $coordinate->setLatitude('54.6847306');
+        $coordinate->setLongitude('25.2687229');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Kačių Kavinė');
+        $coordinate->setAddress('J. Jasinskio g. 1, Vilnius 01111');
+        $coordinate->setLatitude('54.6847548');
+        $coordinate->setLongitude('25.2687229');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Chaika');
+        $coordinate->setAddress('Totorių g. 7, Vilnius 01121');
+        $coordinate->setLatitude('54.6847548');
+        $coordinate->setLongitude('25.2687229');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('"BREW" Kavos virėjai');
+        $coordinate->setAddress('Pylimo g. 19, Vilnius 01141');
+        $coordinate->setLatitude('54.6795571');
+        $coordinate->setLongitude('25.2771987');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Caffeine LT');
+        $coordinate->setAddress('Saltoniškių g. 9, Vilnius 08105');
+        $coordinate->setLatitude('54.6999129');
+        $coordinate->setLongitude('25.256889');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Huracán Coffee');
+        $coordinate->setAddress('Saltoniškių g. 9, Vilnius 08105');
+        $coordinate->setLatitude('54.6881343');
+        $coordinate->setLongitude('25.2520652');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Huracán Coffee');
+        $coordinate->setAddress('Vokiečių g. 15, Vilnius 01130');
+        $coordinate->setLatitude('54.6873405');
+        $coordinate->setLongitude('25.2679439');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Lietuvos Nacionalinė Martyno Mažvydo Biblioteka');
+        $coordinate->setAddress('Gedimino pr. 51, Vilnius 01504');
+        $coordinate->setLatitude('54.6873876');
+        $coordinate->setLongitude('25.2679438');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+        $coordinate = new Coordinate();
+        $coordinate->setName('Vero Cafe');
+        $coordinate->setAddress('Ozo 18, Vilnius lt-08243');
+        $coordinate->setLatitude('54.7142568');
+        $coordinate->setLongitude('25.2732653');
+        $coordinate->setValidated(true);
+        $coordinate->setCoordinateType($this->getReference('public'));
+
+        $manager->persist($coordinate);
+
+
+
         $manager->flush();
     }
 

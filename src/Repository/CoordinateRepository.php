@@ -20,11 +20,7 @@ class CoordinateRepository extends ServiceEntityRepository
 
     }
 
-    /**
-     * @Assert\Type("float")
-     */
-
-    public function getCoordinates($bottomLeftLat, $bottomLeftLng, $topRightLat, $topRightLng){
+    public function getCoordinates(float $bottomLeftLat, float $bottomLeftLng, float $topRightLat, float $topRightLng){
 
         $query = "SELECT id, name, address, latitude, longitude
                 from coordinate
@@ -39,6 +35,5 @@ class CoordinateRepository extends ServiceEntityRepository
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
 
 }

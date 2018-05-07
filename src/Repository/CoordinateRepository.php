@@ -40,27 +40,5 @@ class CoordinateRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-//    public function getAllCoordinates(){
-//        $query ="SELECT id, name, address, latitude, longitude
-//                from coordinate, coordinate_type
-//                where coordinate_type.id = coordinate_type_id";
-//        $connection = $this->getEntityManager()->getConnection();
-//        $statment = $connection->executeQuery($query);
-//        return $statment->fetchAll();
-//    }
 
-    public function getCoordinateByType($type){
-        $query = "select * from coordinate
-                where coordinate_type_id=(select id from coordinate_type where type = '$type')";
-        $connection = $this->getEntityManager()->getConnection();
-        $statment = $connection->executeQuery($query);
-        return $statment->fetchAll();
-    }
-
-    public function getTypes(){
-        $query = 'select type from coordinate_type;';
-        $connection = $this->getEntityManager()->getConnection();
-        $statment = $connection->executeQuery($query);
-        return $statment->fetchAll();
-    }
 }

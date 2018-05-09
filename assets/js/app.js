@@ -7,6 +7,8 @@ require('startbootstrap-agency/vendor/jquery-easing/jquery.easing');
 let googleMapsLoader= require('google-maps');
 googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
 
+var markers = [];
+
 googleMapsLoader.load(function(google){
     var styledMapType = new google.maps.StyledMapType(
         [
@@ -131,6 +133,21 @@ googleMapsLoader.load(function(google){
         }
     });
 
+    var timer;
+    map.addListener('bounds_changed', function() {
+
+        if(timer) {
+            window.clearTimeout(timer);
+        }
+
+        timer = window.setTimeout(function () {
+            deleteCoordinates();
+            getCoordinates(google, map);
+        }, 1000);
+
+    });
+
+
     infoWindow = new google.maps.InfoWindow;
 
 
@@ -162,28 +179,59 @@ googleMapsLoader.load(function(google){
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-    $.get( "/mapcoordinate", function( data ) {
-        var infowindow = new google.maps.InfoWindow();
-
-        var marker, i;
-        var infoWindowContent = [];
-        for (i = 0; i < data.length; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
-                map: map
-            });
-
-            var url = "/coordinate/" + data[i].id;
-            infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
-                                    "<div><a href="+url+">Plačiau</a></div>";
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infowindow.setContent(infoWindowContent[i]);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-        }
-    });
 });
+
+
+
+
+function getCoordinates( google, map ) {
+
+    var bounds = map.getBounds();
+    console.log(bounds);
+    $.get(
+        "/mapcoordinate?bottom_left_lat="+bounds.f.b+
+        "&top_right_lat="+bounds.f.f+
+        "&bottom_left_lng="+bounds.b.b+
+        "&top_right_lng="+bounds.b.f,
+        function( data ) {
+            console.log(data.length);
+            var infowindow = new google.maps.InfoWindow();
+
+
+            var marker, i;
+            var infoWindowContent = [];
+            for (i = 0; i < data.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
+                    map: map
+                });
+                markers.push(marker);
+            }
+            for (i = 0; i < data.length; i++) {
+                var url = "/coordinate/" + data[i].id;
+                infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
+                    "<div><a href="+url+">Plačiau</a></div>";
+
+                var currentMarker = markers[i];
+                google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
+                    return function() {
+                        infowindow.setContent(infoWindowContent[i]);
+                        infowindow.open(map, currentMarker);
+                    }
+                })(currentMarker, i));
+            }
+        }
+    );
+
+
+}
+
+function deleteCoordinates() {
+    //Loop through all the markers and remove
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
 

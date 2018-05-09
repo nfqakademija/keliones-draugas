@@ -189,12 +189,14 @@ function getCoordinates( google, map ) {
     var bounds = map.getBounds();
     console.log(bounds);
     $.get(
-        "/mapcoordinate?bottom_left_lat="+bounds.f.b+
-        "&top_right_lat="+bounds.f.f+
-        "&bottom_left_lng="+bounds.b.b+
-        "&top_right_lng="+bounds.b.f,
+        "/mapcoordinate",
+        {
+            'bottom_left_lat': bounds.f.b,
+            'top_right_lat': bounds.f.f,
+            'bottom_left_lng': bounds.b.b,
+            'top_right_lng': bounds.b.f
+        },
         function( data ) {
-            console.log(data.length);
             var infowindow = new google.maps.InfoWindow();
 
 

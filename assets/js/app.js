@@ -141,9 +141,8 @@ googleMapsLoader.load(function(google){
         }
 
         timer = window.setTimeout(function () {
-            deleteCoordinates();
             getCoordinates(google, map);
-        }, 1000);
+        }, 500);
 
     });
 
@@ -196,6 +195,7 @@ function getCoordinates( google, map ) {
             'top_right_lng': bounds.b.f
         },
         function( data ) {
+            deleteCoordinates();
             var infowindow = new google.maps.InfoWindow();
 
 

@@ -187,7 +187,6 @@ googleMapsLoader.load(function(google){
 function getCoordinates( google, map ) {
 
     var bounds = map.getBounds();
-    console.log(bounds);
     $.get(
         "/mapcoordinate",
         {

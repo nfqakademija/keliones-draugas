@@ -1,8 +1,4 @@
 require('bootstrap');
-require('startbootstrap-agency/js/jqBootstrapValidation');
-require('startbootstrap-agency/js/contact_me');
-require('startbootstrap-agency/js/agency');
-require('startbootstrap-agency/vendor/jquery-easing/jquery.easing');
 
 let googleMapsLoader= require('google-maps');
 googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';

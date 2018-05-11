@@ -1,7 +1,13 @@
 require('bootstrap');
+require('startbootstrap-agency/js/jqBootstrapValidation');
+require('startbootstrap-agency/js/contact_me');
+require('startbootstrap-agency/js/agency');
+require('startbootstrap-agency/vendor/jquery-easing/jquery.easing');
 
 let googleMapsLoader= require('google-maps');
 googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
+
+var markers = [];
 
 googleMapsLoader.load(function(google){
     var styledMapType = new google.maps.StyledMapType(
@@ -115,7 +121,7 @@ googleMapsLoader.load(function(google){
                 stylers: [{color: '#92998d'}]
             }
         ],
-        {name: 'Rozeciu taskai'}
+        {name: 'Paslaugų tiekėjai'}
     );
 
     var map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -126,6 +132,20 @@ googleMapsLoader.load(function(google){
                 'styled_map']
         }
     });
+
+    var timer;
+    map.addListener('bounds_changed', function() {
+
+        if(timer) {
+            window.clearTimeout(timer);
+        }
+
+        timer = window.setTimeout(function () {
+            getCoordinates(google, map);
+        }, 500);
+
+    });
+
 
     infoWindow = new google.maps.InfoWindow;
 
@@ -142,32 +162,77 @@ googleMapsLoader.load(function(google){
             infoWindow.open(map);
             map.setCenter(pos);
         }, function() {
+            $.getJSON('https://geoip-db.com/json/')
+                .done (function(location) {
+                    var pos = {
+                        lat: location.latitude,
+                        lng: location.longitude,
+                    };
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+                });
+
         });
     }
-
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-
-    $.get( "/mapcoordinate", function( data ) {
-        var infowindow = new google.maps.InfoWindow();
-
-        var marker, i;
-        for (i = 0; i < data.length; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
-                map: map
-            });
-
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infowindow.setContent(data[i].address);
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-        }
-    });
-
 });
+
+
+
+
+function getCoordinates( google, map ) {
+
+    var bounds = map.getBounds();
+    $.get(
+        "/mapcoordinate",
+        {
+            'bottom_left_lat': bounds.f.b,
+            'top_right_lat': bounds.f.f,
+            'bottom_left_lng': bounds.b.b,
+            'top_right_lng': bounds.b.f
+        },
+        function( data ) {
+            deleteCoordinates();
+            var infowindow = new google.maps.InfoWindow();
+
+
+            var marker, i;
+            var infoWindowContent = [];
+            for (i = 0; i < data.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
+                    map: map
+                });
+                markers.push(marker);
+            }
+            for (i = 0; i < data.length; i++) {
+                var url = "/coordinate/" + data[i].id;
+                infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
+                    "<div><a href="+url+">Plačiau</a></div>";
+
+                var currentMarker = markers[i];
+                google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
+                    return function() {
+                        infowindow.setContent(infoWindowContent[i]);
+                        infowindow.open(map, currentMarker);
+                    }
+                })(currentMarker, i));
+            }
+        }
+    );
+
+
+}
+
+function deleteCoordinates() {
+    //Loop through all the markers and remove
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
+}
+
 

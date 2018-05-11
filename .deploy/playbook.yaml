@@ -48,6 +48,16 @@
             state: directory
         with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
 
+      - name: Create DB if not exists
+        shell: bin/console doctrine:database:create --if-not-exists --env=prod --no-debug
+        args:
+            chdir: "{{ deploy_helper.new_release_path }}"
+
+      - name: Run DB migrations
+        shell: bin/console doctrine:migrations:migrate --no-interaction --env=prod --no-debug
+        args:
+            chdir: "{{ deploy_helper.new_release_path }}"
+
       - name: Add symlinks from the new release to the shared directory
         file:
             path: "{{ deploy_helper.new_release_path }}/{{ item }}"

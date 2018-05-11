@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CoordinateType{% endblock %}
+
+{% block body %}
+    <h1>Create new CoordinateType</h1>
+
+    {{ include('coordinate_type/_form.html.twig') }}
+
+    <a href="{{ path('coordinate_type_index') }}">back to list</a>
+{% endblock %}

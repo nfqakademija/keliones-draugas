@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CoordinateType{% endblock %}
+
+{% block body %}
+    <h1>CoordinateType</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ coordinate_type.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ coordinate_type.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('coordinate_type_index') }}">back to list</a>
+
+    <a href="{{ path('coordinate_type_edit', {'id': coordinate_type.id}) }}">edit</a>
+
+    {{ include('coordinate_type/_delete_form.html.twig') }}
+{% endblock %}

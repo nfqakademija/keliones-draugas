@@ -20,20 +20,40 @@ class CoordinateRepository extends ServiceEntityRepository
 
     }
 
-    public function getCoordinates(float $bottomLeftLat, float $bottomLeftLng, float $topRightLat, float $topRightLng){
+    public function getCoordinates(float $bottomLeftLat, float $bottomLeftLng, float $topRightLat, float $topRightLng, array $typeIds){
 
         $query = "SELECT id, name, address, latitude, longitude
                 from coordinate
                 where ? <= latitude AND latitude <= ?
                       and ? <= longitude AND longitude <= ?";
+
+        if (!empty($typeIds)) {
+            $query .= " AND coordinate_type_id IN (?)";
+        }
         $connection = $this->getEntityManager()->getConnection();
         $stmt = $connection->prepare($query);
         $stmt->bindValue(1, $bottomLeftLat);
         $stmt->bindValue(2, $bottomLeftLng);
         $stmt->bindValue(3, $topRightLat);
         $stmt->bindValue(4, $topRightLng);
+        if(!empty($typeIds)){
+            $stmt->bindValue(5, implode(',', $typeIds));
+        }
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function getCoordinateByType($type){
+        $query = "select * from coordinate
+                where coordinate_type_id IN (select id from coordinate_type where type IN ($type))";
+        $connection = $this->getEntityManager()->getConnection();
+        $statment = $connection->executeQuery($query);
+        return $statment->fetchAll();
+    }
 
+    public function getTypes(){
+        $query = 'select id, type from coordinate_type ORDER BY type ASC;';
+        $connection = $this->getEntityManager()->getConnection();
+        $statment = $connection->executeQuery($query);
+        return $statment->fetchAll();
+    }
 }

@@ -5,7 +5,6 @@
 
     <body>
 
-
         <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="/">Travel Mate</a>
@@ -16,7 +15,6 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
 
-
                         {% if app.user %}
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/logout">Log Out</a>
@@ -24,6 +22,13 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/coordinate">Coordinates</a>
                         </li>
+
+                        {% if  is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{{ path('coordinate_type_index') }}">Types</a>
+                        </li>
+                        {% endif %}
+
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link js-scroll-trigger" href="/login">Log In</a>
@@ -33,18 +38,14 @@
                             </li>
                         {% endif %}
 
-
                     </ul>
                 </div>
             </div>
         </nav>
 
-
-
         {% block body %}
 
         {% endblock %}
-
 
         {% include 'partials/footer.html.twig' %}
 

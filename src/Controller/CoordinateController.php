@@ -49,8 +49,20 @@ class CoordinateController extends Controller
     /**
      * @Route("/{id}", name="coordinate_show", methods="GET")
      */
-    public function show(Coordinate $coordinate): Response
+    public function show(Coordinate $coordinate, Request $request): Response
     {
+        if($coordinate->getThread() === null)
+        {
+            $threadManager = $this->get('fos_comment.manager.thread');
+            $thread = $threadManager->createThread();
+            $thread->setId($coordinate->getId());
+            $thread->setPermalink($request->getUri());
+
+            // Add the thread
+            $threadManager->saveThread($thread);
+            $coordinate->setThread($thread);
+            $this->get('doctrine.orm.default_entity_manager')->flush();
+        }
         return $this->render('coordinate/show.html.twig', ['coordinate' => $coordinate]);
     }
 

@@ -13,7 +13,6 @@ class HomeController extends Controller
 {
     /**
      * @Route("/get-types")
-
      */
     public function getCoordinateTypes(CoordinateRepository $repository){
             return new JsonResponse($repository->getTypes());

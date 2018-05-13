@@ -1,4 +1,5 @@
 require('bootstrap');
+import './comments.js';
 
 let googleMapsLoader= require('google-maps');
 googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';

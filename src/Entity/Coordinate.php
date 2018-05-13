@@ -42,6 +42,14 @@ class Coordinate
     private $validated;
 
     /**
+     * @var Thread|null
+     * @ORM\OneToOne(targetEntity="App\Entity\Thread")
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=true)
+     */
+    private $thread;
+
+
+    /**
      * @return boolean
      */
     public function getValidated()
@@ -67,7 +75,7 @@ class Coordinate
     /**
      * @return CoordinateType
      */
-    public function getCoordinateType(): CoordinateType
+    public function getCoordinateType(): ?CoordinateType
     {
         return $this->coordinateType;
     }
@@ -135,4 +143,22 @@ class Coordinate
 
         return $this;
     }
+
+    /**
+     * @return Thread|null
+     */
+    public function getThread(): ?Thread
+    {
+        return $this->thread;
+    }
+
+    /**
+     * @param Thread|null $thread
+     */
+    public function setThread(?Thread $thread): void
+    {
+        $this->thread = $thread;
+    }
+
+
 }

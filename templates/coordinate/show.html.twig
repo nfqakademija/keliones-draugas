@@ -36,6 +36,9 @@
 
         {{ include('coordinate/_delete_form.html.twig') }}
 
+        <br><br>
+        {% include '@FOSComment/Thread/async.html.twig' with {'id': coordinate.thread.id} %}
+
 
     </div>
 

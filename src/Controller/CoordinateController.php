@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\Coordinate;
 use App\Form\CoordinateType;
 use App\Repository\CoordinateRepository;
-use Doctrine\ORM\EntityManager;
-use FOS\CommentBundle\Entity\ThreadManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

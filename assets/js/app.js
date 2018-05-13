@@ -202,9 +202,9 @@ googleMapsLoader.load(function(google){
         }, 500);
     });
 
-    infoWindow = new google.maps.InfoWindow;
-
     if (navigator.geolocation) {
+        var infoWindow = new google.maps.InfoWindow;
+        
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
                 lat: position.coords.latitude,

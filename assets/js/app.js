@@ -130,8 +130,6 @@ googleMapsLoader.load(function(google){
         }
     });
 
-
-
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -321,7 +319,7 @@ function deleteCoordinates() {
 }
 
 function GetTypes(data){
-    types = '';
+    var types = '';
     $.ajax({
         type: "POST",
         url: "get-types",
@@ -342,7 +340,7 @@ function loadMarkersByType(google, map) {
 }
 
 function generateDropdownForAllTypes() {
-    dropdownInnerHTML = '';
+    var dropdownInnerHTML = '';
     dropdownInnerHTML += '<div class="dropdown">\
         <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
         Dropdown button\

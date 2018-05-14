@@ -3,24 +3,26 @@
 {% block title %}CoordinateType{% endblock %}
 
 {% block body %}
-    <h1>CoordinateType</h1>
+    <div class="container">
+        <h1 class="m-4">Coordinate type</h1>
+        {{ include('coordinate_type/_delete_form.html.twig') }}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ coordinate_type.id }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ coordinate_type.type }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ coordinate_type.id }}</td>
+                </tr>
+                <tr>
+                    <th>Type</th>
+                    <td>{{ coordinate_type.type }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('coordinate_type_index') }}">back to list</a>
+        <a class="btn btn-primary m-3" href="{{ path('coordinate_type_index') }}">Back to list</a>
 
-    <a href="{{ path('coordinate_type_edit', {'id': coordinate_type.id}) }}">edit</a>
+        <a class="btn btn-primary m-3" href="{{ path('coordinate_type_edit', {'id': coordinate_type.id}) }}">Edit</a>
 
-    {{ include('coordinate_type/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

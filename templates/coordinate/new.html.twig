@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nauja koordinatė{% endblock %}
+{% block title %}Create new coordinate{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Kurti naują koordinatę</h1>
+        <h1 class="m-4">Create new coordinate</h1>
 
         {{ include('coordinate/_form.html.twig') }}
 
-        <a href="{{ path('coordinate_index') }}">Atgal į sąrašą</a>
+        <a href="{{ path('coordinate_index') }}">Back to list</a>
     </div>
 {% endblock %}

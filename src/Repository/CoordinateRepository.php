@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Coordinate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Connection;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -20,20 +21,34 @@ class CoordinateRepository extends ServiceEntityRepository
 
     }
 
-    public function getCoordinates(float $bottomLeftLat, float $bottomLeftLng, float $topRightLat, float $topRightLng){
-
-        $query = "SELECT id, name, address, latitude, longitude
+    public function getCoordinates(float $bottomLeftLat, float $bottomLeftLng, float $topRightLat, float $topRightLng, array $typeIds)
+    {
+        $query = 'SELECT id, name, address, latitude, longitude
                 from coordinate
                 where ? <= latitude AND latitude <= ?
-                      and ? <= longitude AND longitude <= ?";
-        $connection = $this->getEntityManager()->getConnection();
-        $stmt = $connection->prepare($query);
-        $stmt->bindValue(1, $bottomLeftLat);
-        $stmt->bindValue(2, $bottomLeftLng);
-        $stmt->bindValue(3, $topRightLat);
-        $stmt->bindValue(4, $topRightLng);
-        $stmt->execute();
+                      and ? <= longitude AND longitude <= ?';
+
+        if (!empty($typeIds)) {
+            $query .= ' AND coordinate_type_id IN (?)';
+        }
+
+        $values = [$bottomLeftLat, $bottomLeftLng, $topRightLat, $topRightLng];
+        $types = [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR];
+
+        if (!empty($typeIds)) {
+            $values[] = $typeIds;
+            $types[] = Connection::PARAM_INT_ARRAY;
+        }
+
+        $stmt = $this->getEntityManager()->getConnection()->executeQuery($query, $values, $types);
+
         return $stmt->fetchAll();
     }
 
+    public function getTypes(){
+        $query = 'select id, type from coordinate_type ORDER BY type ASC;';
+        $connection = $this->getEntityManager()->getConnection();
+        $statment = $connection->executeQuery($query);
+        return $statment->fetchAll();
+    }
 }

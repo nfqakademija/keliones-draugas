@@ -36,5 +36,9 @@
         <a class="btn btn-primary m-3" href="{{ path('coordinate_index') }}">Back to list</a>
         <a class="btn btn-primary m-3" href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
 
+
+        <br><br>
+        {% include '@FOSComment/Thread/async.html.twig' with {'id': coordinate.thread.id} %}
+
     </div>
 {% endblock %}

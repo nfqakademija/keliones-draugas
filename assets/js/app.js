@@ -1,7 +1,9 @@
 require('bootstrap');
+import './comments.js';
 
 let googleMapsLoader= require('google-maps');
 googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
+googleMapsLoader.LIBRARIES = ['places'];
 
 var markers = [];
 
@@ -297,7 +299,7 @@ googleMapsLoader.load(function(google){
                 ]
             }
         ],
-        {name: 'Paslaugų tiekėjai'}
+        {name: 'Retro'}
     );
 
     var map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -305,8 +307,69 @@ googleMapsLoader.load(function(google){
         zoom: 12,
         mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-                'styled_map']
+                'styled_map'],
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.BOTTOM_LEFT
         }
+    });
+
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function () {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    var search_makers = [];
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function () {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        // Clear out the old search_makers.
+        search_makers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        search_makers = [];
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function (place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            search_makers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
     });
 
     var timer;
@@ -319,14 +382,11 @@ googleMapsLoader.load(function(google){
         timer = window.setTimeout(function () {
             getCoordinates(google, map);
         }, 500);
-
     });
 
-
-    infoWindow = new google.maps.InfoWindow;
-
-
     if (navigator.geolocation) {
+        var infoWindow = new google.maps.InfoWindow;
+        
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
                 lat: position.coords.latitude,
@@ -347,20 +407,37 @@ googleMapsLoader.load(function(google){
                     infoWindow.open(map);
                     map.setCenter(pos);
                 });
-
         });
     }
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
+    function CenterControl(controlDiv, map) {
+        var controlUI = document.createElement('div');
+        controlUI.style.cursor = 'pointer'
+        controlDiv.appendChild(controlUI);
+
+        var controlText = document.createElement('div');
+        controlText.innerHTML = generateDropdownForAllTypes();
+        controlUI.appendChild(controlText);
+        loadMarkersByType(google, map);
+    }
+
+    var centerControlDiv = document.createElement('div');
+    var centerControl = new CenterControl(centerControlDiv, map);
+
+    centerControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
 });
-
-
-
 
 function getCoordinates( google, map ) {
 
+    var typeArr = [];
+    $('.form-check-input:checkbox:checked').each(function () {
+        typeArr.push($(this).val());
+
+    });
     var bounds = map.getBounds();
     $.get(
         "/mapcoordinate",
@@ -368,12 +445,13 @@ function getCoordinates( google, map ) {
             'bottom_left_lat': bounds.f.b,
             'top_right_lat': bounds.f.f,
             'bottom_left_lng': bounds.b.b,
-            'top_right_lng': bounds.b.f
+            'top_right_lng': bounds.b.f,
+            'type_ids': typeArr,
         },
         function( data ) {
             deleteCoordinates();
-            var infowindow = new google.maps.InfoWindow();
 
+            var infowindow = new google.maps.InfoWindow();
 
             var marker, i;
             var infoWindowContent = [];
@@ -399,16 +477,46 @@ function getCoordinates( google, map ) {
             }
         }
     );
-
-
 }
 
 function deleteCoordinates() {
-    //Loop through all the markers and remove
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
     markers = [];
 }
 
+function GetTypes(data){
+    var types = '';
+    $.ajax({
+        type: "POST",
+        url: "get-types",
+        async: false,
+        success: function(data) {
+            $.each(data, function(k, v) {
+                types += "<div class=\"form-check\"><label class=\"form-check-label dropdown-item\"><input type=\"checkbox\"  value=\""+v['id']+"\" class=\"form-check-input type-checkbox\">"+v['type']+"</label></div>";
+            });
+        }
+    });
+    return types;
+}
+
+function loadMarkersByType(google, map) {
+    $(document).on('click', '.type-checkbox', function () {
+        getCoordinates(google, map);
+    });
+}
+
+function generateDropdownForAllTypes() {
+    var dropdownInnerHTML = '';
+    dropdownInnerHTML += '<div class="dropdown">\
+        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        Select type\
+        </button>\
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+    //Foreach goes here:
+    dropdownInnerHTML += GetTypes();
+    dropdownInnerHTML += '</div></div>';
+    return dropdownInnerHTML;
+}
 

@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Koordinačių sąrašas{% endblock %}
+{% block title %}Coordinate list{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="m-4">Koordinačių sąrašas</h1>
+        <div class="container">
+        <h1 class="m-4">Coordinate list</h1>
 
-        <a class="btn btn-primary m-3" href="{{ path('coordinate_new') }}">Kurti naują koordinatę</a>
+        <a class="btn btn-primary m-3" href="{{ path('coordinate_new') }}">Create new coordinate</a>
 
         <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Pavadinimas</th>
-                    <th>Adresas</th>
-                    <th>Platuma (latitude)</th>
-                    <th>Ilguma (longitude)</th>
-                    <th>Veiksmai</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +28,9 @@
                     <td>{{ coordinate.latitude }}</td>
                     <td>{{ coordinate.longitude }}</td>
                     <td>
-                        <a href="{{ path('coordinate_show', {'id': coordinate.id}) }}">Išsamiau</a>
+                        <a href="{{ path('coordinate_show', {'id': coordinate.id}) }}">More</a>
                         <span> | </span>
-                        <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Redaguoti</a>
+                        <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
                     </td>
                 </tr>
             {% else %}

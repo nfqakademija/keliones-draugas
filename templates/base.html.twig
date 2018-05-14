@@ -1,58 +1,55 @@
 <!DOCTYPE html>
 <html>
-
+    <div id="wrap">
     {% include 'partials/header.html.twig' %}
 
-    <body>
+        <body>
+            <div id="content">
+                <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+                        <a class="navbar-brand js-scroll-trigger mano" href="/">Travel Mate</a>
+                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            Menu
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav text-uppercase ml-auto">
 
 
-        <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
-            {#<div class="container">#}
-                <a class="navbar-brand js-scroll-trigger mano" href="/">Travel Mate</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fa fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ml-auto">
+                                {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="/logout">Log Out</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="/coordinate">Coordinates</a>
+                                </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link js-scroll-trigger" href="/login">Log In</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link js-scroll-trigger" href="/register">Register</a>
+                                    </li>
+                                {% endif %}
 
 
-                        {% if app.user %}
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="/logout">Log Out</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="/coordinate">Coordinates</a>
-                        </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="/login">Log In</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="/register">Register</a>
-                            </li>
-                        {% endif %}
+                            </ul>
+                        </div>
+                </nav>
 
 
-                    </ul>
-                </div>
-            {#</div>#}
-        </nav>
+                {% block body %}
+
+                {% endblock %}
+            </div>
+
+            {% include 'partials/footer.html.twig' %}
 
 
-
-        {% block body %}
-
-        {% endblock %}
-
-
-        {% include 'partials/footer.html.twig' %}
-
-        {% block javascripts %}
-            <script src="{{ asset('build/js/app.js') }}"></script>
-        {% endblock %}
-    </body>
-
+            {% block javascripts %}
+                <script src="{{ asset('build/js/app.js') }}"></script>
+            {% endblock %}
+        </body>
+    </div>
 
 
 </html>

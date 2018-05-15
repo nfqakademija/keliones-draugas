@@ -383,32 +383,17 @@ googleMapsLoader.load(function(google){
             getCoordinates(google, map);
         }, 500);
     });
-
-    if (navigator.geolocation) {
-        var infoWindow = new google.maps.InfoWindow;
         
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-        }, function() {
-            $.getJSON('https://geoip-db.com/json/')
-                .done (function(location) {
-                    var pos = {
-                        lat: location.latitude,
-                        lng: location.longitude,
-                    };
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-                });
-        });
-    }
+    navigator.geolocation.getCurrentPosition(function() {
+        $.getJSON('https://geoip-db.com/json/')
+            .done (function(location) {
+                var pos = {
+                    lat: location.latitude,
+                    lng: location.longitude,
+                };
+                map.setCenter(pos);
+            });
+    });
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');

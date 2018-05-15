@@ -216,8 +216,8 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate = new Coordinate();
         $coordinate->setName('Caffeine LT');
         $coordinate->setAddress('Vilniaus g. 17, Vilnius 01402');
-        $coordinate->setLatitude('54.6847306');
-        $coordinate->setLongitude('25.2687229');
+        $coordinate->setLatitude('54.6865426');
+        $coordinate->setLongitude('25.2771111');
         $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('public'));
 
@@ -236,8 +236,8 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate = new Coordinate();
         $coordinate->setName('Caffeine LT');
         $coordinate->setAddress('Gedimino pr. 52, Vilnius 01110');
-        $coordinate->setLatitude('54.6847306');
-        $coordinate->setLongitude('25.2687229');
+        $coordinate->setLatitude('54.6893834');
+        $coordinate->setLongitude('25.2635775');
         $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('public'));
 
@@ -246,8 +246,8 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate = new Coordinate();
         $coordinate->setName('Kačių Kavinė');
         $coordinate->setAddress('J. Jasinskio g. 1, Vilnius 01111');
-        $coordinate->setLatitude('54.6847548');
-        $coordinate->setLongitude('25.2687229');
+        $coordinate->setLatitude('54.6878831');
+        $coordinate->setLongitude('25.2654022');
         $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('public'));
 
@@ -256,8 +256,8 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $coordinate = new Coordinate();
         $coordinate->setName('Chaika');
         $coordinate->setAddress('Totorių g. 7, Vilnius 01121');
-        $coordinate->setLatitude('54.6847548');
-        $coordinate->setLongitude('25.2687229');
+        $coordinate->setLatitude('54.6852752');
+        $coordinate->setLongitude('25.2797805');
         $coordinate->setValidated(true);
         $coordinate->setCoordinateType($this->getReference('public'));
 

@@ -374,7 +374,7 @@ googleMapsLoader.load(function(google){
 
     var timer;
     map.addListener('bounds_changed', function() {
-
+        
         if(timer) {
             window.clearTimeout(timer);
         }
@@ -417,7 +417,6 @@ googleMapsLoader.load(function(google){
 });
 
 function getCoordinates( google, map ) {
-
     var typeArr = [];
     $('.form-check-input:checkbox:checked').each(function () {
         typeArr.push($(this).val());
@@ -443,7 +442,6 @@ function getCoordinates( google, map ) {
             for (i = 0; i < data.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
-                    map: map
                 });
                 markers.push(marker);
             }
@@ -461,9 +459,14 @@ function getCoordinates( google, map ) {
                 })(currentMarker, i));
             }
         }
-    );
+    )
+        // clusters
+        .done(function( data ) {
+            if (typeof markers !== 'undefined' && markers.length > 0) {
+                var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: "15"});
+            }
+        });
 }
-
 function deleteCoordinates() {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);

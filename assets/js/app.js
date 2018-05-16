@@ -1,4 +1,5 @@
 require('bootstrap');
+require('js-marker-clusterer/src/markerclusterer.js');
 import './comments.js';
 
 let googleMapsLoader= require('google-maps');
@@ -383,17 +384,16 @@ googleMapsLoader.load(function(google){
             getCoordinates(google, map);
         }, 500);
     });
-        
-    navigator.geolocation.getCurrentPosition(function() {
-        $.getJSON('https://geoip-db.com/json/')
-            .done (function(location) {
-                var pos = {
-                    lat: location.latitude,
-                    lng: location.longitude,
-                };
-                map.setCenter(pos);
-            });
-    });
+
+    $.getJSON('https://geoip-db.com/json/')
+        .done (function(location) {
+            var pos = {
+                lat: location.latitude,
+                lng: location.longitude,
+            };
+            map.setCenter(pos);
+        });
+
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');

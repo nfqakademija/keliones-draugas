@@ -1,48 +1,4 @@
-html,
-body {
-    margin:0;
-    padding:0;
-    height:100%;
-}
-
-#wrap {
-    min-height:100%;
-    position:relative;
-}
-
-#content {
-    padding-bottom:85px;   /* Height of the footer */
-}
-
-footer{
-    background: #ffae37;
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:85px;   /* Height of the footer */
-}
-
-body{
-    background: #f8a2ab !important;
-}
-
-#mainNav .navbar-nav .nav-item .nav-link {
-    color: white;
-}
-
-#mainNav .navbar-brand {
-    color: white;
-}
-
-#mainNav {
-
-    background: #0b032d;
-    max-height: 80px;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: relative;
-}
+/*forms*/
 
 #fos_user_registration_form_plainPassword_first,
 #fos_user_registration_form_plainPassword_second,
@@ -97,78 +53,17 @@ body{
     border-top-right-radius: 0;
 }
 
-.logo-style {
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: bold;
-    font-size: 60px !important;
-}
+/*map*/
 
-div .about{
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: bold;
-    color: #0B032D !important;
-    padding-bottom: 30px;
-}
-
-.section-subheading{
-    font-size: 20px !important;
-}
-
-.image{
-    height: 150px;
-    width: 150px;
-}
-
-.dropdown{
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-/*Search box style*/
-
-html, body, #map-canvas {
+html, body {
     height: 100%;
-    margin: 0px;
-    padding: 0px
-}
-.controls {
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin: 0;
+    padding: 0;
 }
 
-#pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
+#googleMap{
+    height: 100%;
 }
 
-#pac-input:focus {
-    border-color: #4d90fe;
-}
 
-.pac-container {
-    font-family: Roboto;
-}
 
-#type-selector {
-    color: #fff;
-    background-color: #4d90fe;
-    padding: 5px 11px 0px 11px;
-}
-
-#type-selector label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
-}

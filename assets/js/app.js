@@ -317,7 +317,7 @@ googleMapsLoader.load(function(google){
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+    // map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function () {
@@ -398,6 +398,8 @@ googleMapsLoader.load(function(google){
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
+    // dropdown
+
     function CenterControl(controlDiv, map) {
         var controlUI = document.createElement('div');
         controlUI.style.cursor = 'pointer'
@@ -457,6 +459,14 @@ function getCoordinates( google, map ) {
                         infowindow.open(map, currentMarker);
                     }
                 })(currentMarker, i));
+
+                $('#refresh').click(function() {
+                    refreshMap()
+                })
+                $('#clear').click(function() {
+                    clearClusters()
+                })
+
             }
         }
     )
@@ -507,4 +517,3 @@ function generateDropdownForAllTypes() {
     dropdownInnerHTML += '</div></div>';
     return dropdownInnerHTML;
 }
-

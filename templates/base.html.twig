@@ -4,6 +4,7 @@
 
     {% block style %}
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
     {% endblock %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/">Travel mate</a>
@@ -34,15 +35,19 @@
                     </li>
                     {% endif %}
                     <li class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle btn btn-outline-success" type="button" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select type
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Clear</a>
-                        </div>
+                        <div id="testdrop"></div>
+                        {#<button class="nav-link dropdown-toggle btn btn-outline-success" type="button" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+                            {#Select type#}
+                        {#</button>#}
+                        {#<div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+                            {#<a class="dropdown-item" href="#">Action</a>#}
+                            {#<a class="dropdown-item" href="#">Another action</a>#}
+                            {#<div class="dropdown-divider"></div>#}
+                            {#<a class="dropdown-item" href="#">Clear</a>#}
+                        {#</div>#}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="planTrip">Plan a trip</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -52,10 +57,12 @@
             </div>
         </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="navbar-brand">Plan a trip:</div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="directions" style="display: none">
+            <input id="start"><br>
+            <input id="end"><br>
+            <input type="button" value="GO" id="calcRoute">
         </nav>
-
+    
         {% block body %}
 
         {% endblock %}

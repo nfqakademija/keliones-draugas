@@ -7,7 +7,8 @@ googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
 googleMapsLoader.LIBRARIES = ['places'];
 
 var markers = [];
-
+var directionsService;
+var map;
 googleMapsLoader.load(function(google){
     var styledMapType = new google.maps.StyledMapType(
         [
@@ -303,7 +304,7 @@ googleMapsLoader.load(function(google){
         {name: 'Retro'}
     );
 
-    var map = new google.maps.Map(document.getElementById('googleMap'), {
+    map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(0,0),
         zoom: 12,
         mapTypeControlOptions: {
@@ -394,30 +395,14 @@ googleMapsLoader.load(function(google){
             map.setCenter(pos);
         });
 
-
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-    // dropdown
-
-    function CenterControl(controlDiv, map) {
-        var controlUI = document.createElement('div');
-        controlUI.style.cursor = 'pointer'
-        controlDiv.appendChild(controlUI);
-
-        var controlText = document.createElement('div');
-        controlText.innerHTML = generateDropdownForAllTypes();
-        controlUI.appendChild(controlText);
-        loadMarkersByType(google, map);
-    }
-
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map);
-
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+    directionsService = new google.maps.DirectionsService();
+    initialize(google, map);
 });
 
+var markerCluster;
 function getCoordinates( google, map ) {
     var typeArr = [];
     $('.form-check-input:checkbox:checked').each(function () {
@@ -459,21 +444,16 @@ function getCoordinates( google, map ) {
                         infowindow.open(map, currentMarker);
                     }
                 })(currentMarker, i));
-
-                $('#refresh').click(function() {
-                    refreshMap()
-                })
-                $('#clear').click(function() {
-                    clearClusters()
-                })
-
             }
         }
     )
         // clusters
         .done(function( data ) {
             if (typeof markers !== 'undefined' && markers.length > 0) {
-                var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: "15"});
+                if (markerCluster) {
+                    markerCluster.clearMarkers();
+                }
+                markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: "15"});
             }
         });
 }
@@ -508,7 +488,7 @@ function loadMarkersByType(google, map) {
 function generateDropdownForAllTypes() {
     var dropdownInnerHTML = '';
     dropdownInnerHTML += '<div class="dropdown">\
-        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <button class="nav-link btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
         Select type\
         </button>\
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
@@ -517,3 +497,37 @@ function generateDropdownForAllTypes() {
     dropdownInnerHTML += '</div></div>';
     return dropdownInnerHTML;
 }
+$('#testdrop').html(generateDropdownForAllTypes());
+$( ".dropdown-menu" ).change(function() {
+    loadMarkersByType(google, map);
+});
+
+$(document).on('click', '#planTrip', function () {
+    $("#directions").toggle();
+});
+
+//directions
+var directionsDisplay;
+
+function initialize(google, map) {
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+    var start = document.getElementById("start").value;
+    var end = document.getElementById("end").value;
+    var request = {
+        origin:start,
+        destination:end,
+        travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(result, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(result);
+        }
+    });
+}
+$(document).on('click', '#calcRoute', function () {
+    calcRoute();
+});

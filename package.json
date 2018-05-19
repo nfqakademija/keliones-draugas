@@ -17,6 +17,7 @@
         "build": "encore production"
     },
     "dependencies": {
+        "js-marker-clusterer": "^1.0.0",
         "startbootstrap-agency": "^4.0.0-beta"
     }
 }

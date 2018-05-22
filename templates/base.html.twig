@@ -1,68 +1,17 @@
 <!DOCTYPE html>
 <html>
     <body>
+        {% block style %}
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+        {% endblock %}
 
-    {% block style %}
-        <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
-        <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
-    {% endblock %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">Travel mate</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        {% if app.request.requestUri == '/'  %}
+            {% include 'partials/menu.html.twig' %}
+        {% else %}
+            {% include 'partials/menu_slim.html.twig' %}
+        {% endif %}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    {% if app.user %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Log Out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/coordinate">Coordinates</a>
-                    </li>
-                    {% if  is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('coordinate_type_index') }}">Types</a>
-                    </li>
-                    {% endif %}
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item dropdown">
-                        <div id="testdrop"></div>
-                        {#<button class="nav-link dropdown-toggle btn btn-outline-success" type="button" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-                            {#Select type#}
-                        {#</button>#}
-                        {#<div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
-                            {#<a class="dropdown-item" href="#">Action</a>#}
-                            {#<a class="dropdown-item" href="#">Another action</a>#}
-                            {#<div class="dropdown-divider"></div>#}
-                            {#<a class="dropdown-item" href="#">Clear</a>#}
-                        {#</div>#}
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="planTrip">Plan a trip</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" id="pac-input"  placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="directions" style="display: none">
-            <input id="start"><br>
-            <input id="end"><br>
-            <input type="button" value="GO" id="calcRoute">
-        </nav>
-    
         {% block body %}
 
         {% endblock %}

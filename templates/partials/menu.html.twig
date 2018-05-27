@@ -1,0 +1,68 @@
+{% block menu %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Travel mate</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/coordinate">Coordinates</a>
+                    </li>
+                    {% if  is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('coordinate_type_index') }}">Types</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <div id="testdrop"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="planTrip">Plan a trip</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" id="pac-input"  placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="directions" style="display: none">
+        <form class="form-inline my-2 my-lg-0">
+            <div class="row">
+                <div class="col-sm">
+                    <input class="form-control" placeholder="Where are you starting?" id="start">
+                </div>
+
+                <b>Stops:</b> <br>
+                <select multiple id="waypoints">
+                    <option value="vilnius">vilnius</option>
+                    <option value="kaunas">kaunas</option>
+                    <option value="klaipeda">klaipeda</option>
+                </select>
+                <br>
+
+                <div class="col-sm">
+                    <input class="form-control" placeholder="Where are you going?" id="end">
+                </div>
+
+                <button type="button" class="btn btn-outline-success my-2 my-sm-0" value="GO" id="submit">GO</button>
+                </div>
+                    <div id="directions-panel"></div>
+                </div>
+            </div>
+        </form>
+    </nav>
+{% endblock %}

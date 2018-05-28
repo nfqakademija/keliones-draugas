@@ -27,5 +27,4 @@ security:
             anonymous: true
 
     access_control:
-      - { path: ^/coordinate/, roles: ROLE_ADMIN }
       - { path: ^/coordinate-type/, roles: ROLE_ADMIN }

@@ -402,6 +402,16 @@ googleMapsLoader.load(function(google){
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
+
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: fenway,
+            pov: {
+                heading: 34,
+                pitch: 10
+            }
+        });
+    map.setStreetView(panorama);
 });
 
 var markerCluster;
@@ -439,9 +449,8 @@ function getCoordinates( google, map ) {
                 var waypoint = data[i].latitude + '_' + data[i].longitude;
 
                 infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
-                    "<div><a href="+url+">Plačiau</a></div>"+
-                    "<div><button id=\"addWayPoint\" value="+waypoint+">Add to route</button></div>"+
-                    "<div><button id=\"addEndPoint\" value="+waypoint+">Directions to</button></div>";
+                    "<div><a href="+url+">Details</a></div>"+
+                    "<div><button id=\"point\" value="+waypoint+">Add to route</button></div>";
 
                 var currentMarker = markers[i];
                 google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
@@ -514,28 +523,39 @@ $(document).on('click', '#planTrip', function () {
     $("#directions").toggle();
 });
 
-$(document).on('click', '#addEndPoint', function () {
-    $("#end").val($(this).val().replace('_', ','));
-});
-$(document).on('click', '#addWayPoint', function () {
-    $("#waypoints").val($(this).val().replace('_', ','));
+$(document).on('click', '#point', function () {
+    var pointCoordinates = $(this).val().replace('_', ',');
+    var destinationLength = $(".end").length;
+    $(".end").each(function(index){
+        if((index+1) != destinationLength) {
+            if ($(this).val().length === 0) {
+                $(this).val(pointCoordinates);
+            }
+        }else{
+            $(this).val(pointCoordinates);
+        }
+    });
 });
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var waypts = [];
-    var checkboxArray = document.getElementById('waypoints');
-    for (var i = 0; i < checkboxArray.length; i++) {
-        if (checkboxArray.options[i].selected) {
-            waypts.push({
-                location: checkboxArray[i].value,
-                stopover: true
-            });
+    var destinationLength = $(".end").length;
+    $(".end").each(function(index){
+        if((index+1) != destinationLength) {
+            if ($(this).val().length !== 0) {
+                waypts.push({
+                    location: $(this).val(),
+                    stopover: true
+                });
+            }
         }
-    }
+    });
+
+    var destination = $('.end').last().val();
 
     directionsService.route({
         origin: document.getElementById('start').value,
-        destination: document.getElementById('end').value,
+        destination: destination,
         waypoints: waypts,
         optimizeWaypoints: true,
         travelMode: 'DRIVING'
@@ -559,4 +579,5 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         }
     });
 }
+
 

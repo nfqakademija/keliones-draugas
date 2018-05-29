@@ -328,7 +328,7 @@ class CoordinateFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    function getDependencies()
+    public function getDependencies()
     {
         return array(
             CoordinateTypeFixtures::class,

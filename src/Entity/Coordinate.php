@@ -159,6 +159,4 @@ class Coordinate
     {
         $this->thread = $thread;
     }
-
-
 }

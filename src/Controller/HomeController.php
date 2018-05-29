@@ -8,14 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CoordinateRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
 class HomeController extends Controller
 {
     /**
      * @Route("/get-types")
      */
-    public function getCoordinateTypes(CoordinateRepository $repository){
+    public function getCoordinateTypes(CoordinateRepository $repository)
+    {
             return new JsonResponse($repository->getTypes());
-        }
-
+    }
 }

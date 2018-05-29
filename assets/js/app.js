@@ -7,7 +7,6 @@ googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
 googleMapsLoader.LIBRARIES = ['places'];
 
 var markers = [];
-var directionsService;
 var map;
 googleMapsLoader.load(function(google){
     var styledMapType = new google.maps.StyledMapType(
@@ -304,6 +303,8 @@ googleMapsLoader.load(function(google){
         {name: 'Retro'}
     );
 
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
     map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(0,0),
         zoom: 12,
@@ -313,6 +314,10 @@ googleMapsLoader.load(function(google){
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
             position: google.maps.ControlPosition.BOTTOM_LEFT
         }
+    });
+    directionsDisplay.setMap(map);
+    $(document).on('click', '#submit', function () {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
     });
 
     // Create the search box and link it to the UI element.
@@ -376,7 +381,7 @@ googleMapsLoader.load(function(google){
 
     var timer;
     map.addListener('bounds_changed', function() {
-        
+
         if(timer) {
             window.clearTimeout(timer);
         }
@@ -397,9 +402,6 @@ googleMapsLoader.load(function(google){
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-
-    directionsService = new google.maps.DirectionsService();
-    initialize(google, map);
 });
 
 var markerCluster;
@@ -434,8 +436,12 @@ function getCoordinates( google, map ) {
             }
             for (i = 0; i < data.length; i++) {
                 var url = "/coordinate/" + data[i].id;
+                var waypoint = data[i].latitude + '_' + data[i].longitude;
+
                 infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
-                    "<div><a href="+url+">Plačiau</a></div>";
+                    "<div><a href="+url+">Plačiau</a></div>"+
+                    "<div><button id=\"addWayPoint\" value="+waypoint+">Add to route</button></div>"+
+                    "<div><button id=\"addEndPoint\" value="+waypoint+">Directions to</button></div>";
 
                 var currentMarker = markers[i];
                 google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
@@ -447,7 +453,7 @@ function getCoordinates( google, map ) {
             }
         }
     )
-        // clusters
+    // clusters
         .done(function( data ) {
             if (typeof markers !== 'undefined' && markers.length > 0) {
                 if (markerCluster) {
@@ -488,10 +494,10 @@ function loadMarkersByType(google, map) {
 function generateDropdownForAllTypes() {
     var dropdownInnerHTML = '';
     dropdownInnerHTML += '<div class="dropdown">\
-        <button class="nav-link btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <button class="nav-link btn btn-outline-success dropdown-toggle" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
         Select type\
         </button>\
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
     //Foreach goes here:
     dropdownInnerHTML += GetTypes();
     dropdownInnerHTML += '</div></div>';
@@ -502,32 +508,54 @@ $( ".dropdown-menu" ).change(function() {
     loadMarkersByType(google, map);
 });
 
+//directions
+
 $(document).on('click', '#planTrip', function () {
     $("#directions").toggle();
 });
 
-//directions
-var directionsDisplay;
+$(document).on('click', '#addEndPoint', function () {
+    $("#end").val($(this).val().replace('_', ','));
+});
+$(document).on('click', '#addWayPoint', function () {
+    $("#waypoints").val($(this).val().replace('_', ','));
+});
 
-function initialize(google, map) {
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    directionsDisplay.setMap(map);
-}
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    var waypts = [];
+    var checkboxArray = document.getElementById('waypoints');
+    for (var i = 0; i < checkboxArray.length; i++) {
+        if (checkboxArray.options[i].selected) {
+            waypts.push({
+                location: checkboxArray[i].value,
+                stopover: true
+            });
+        }
+    }
 
-function calcRoute() {
-    var start = document.getElementById("start").value;
-    var end = document.getElementById("end").value;
-    var request = {
-        origin:start,
-        destination:end,
-        travelMode: google.maps.TravelMode.DRIVING
-    };
-    directionsService.route(request, function(result, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(result);
+    directionsService.route({
+        origin: document.getElementById('start').value,
+        destination: document.getElementById('end').value,
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: 'DRIVING'
+    }, function(response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                    '</b><br>';
+                summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+            }
+        } else {
+            window.alert('Directions request failed due to ' + status);
         }
     });
 }
-$(document).on('click', '#calcRoute', function () {
-    calcRoute();
-});

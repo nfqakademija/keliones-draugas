@@ -8,7 +8,6 @@
 
 namespace App\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Thread as BaseThread;
 
@@ -23,6 +22,4 @@ class Thread extends BaseThread
      * @ORM\Column(type="integer")
      */
     protected $id;
-
-
 }

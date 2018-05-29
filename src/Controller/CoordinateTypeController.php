@@ -20,7 +20,10 @@ class CoordinateTypeController extends Controller
      */
     public function index(CoordinateTypeRepository $coordinateTypeRepository): Response
     {
-        return $this->render('coordinate_type/index.html.twig', ['coordinate_types' => $coordinateTypeRepository->findAll()]);
+        return $this->render(
+            'coordinate_type/index.html.twig',
+            ['coordinate_types' => $coordinateTypeRepository->findAll()]
+        );
     }
 
     /**

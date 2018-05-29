@@ -51,8 +51,7 @@ class CoordinateController extends Controller
      */
     public function show(Coordinate $coordinate, Request $request): Response
     {
-        if($coordinate->getThread() === null)
-        {
+        if ($coordinate->getThread() === null) {
             $threadManager = $this->get('fos_comment.manager.thread');
             $thread = $threadManager->createThread();
             $thread->setId($coordinate->getId());

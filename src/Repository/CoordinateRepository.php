@@ -18,11 +18,15 @@ class CoordinateRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Coordinate::class);
-
     }
 
-    public function getCoordinates(float $bottomLeftLat, float $bottomLeftLng, float $topRightLat, float $topRightLng, array $typeIds)
-    {
+    public function getCoordinates(
+        float $bottomLeftLat,
+        float $bottomLeftLng,
+        float $topRightLat,
+        float $topRightLng,
+        array $typeIds
+    ) {
         $query = 'SELECT id, name, address, latitude, longitude
                 from coordinate
                 where ? <= latitude AND latitude <= ?
@@ -45,7 +49,8 @@ class CoordinateRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
-    public function getTypes(){
+    public function getTypes()
+    {
         $query = 'select id, type from coordinate_type ORDER BY type ASC;';
         $connection = $this->getEntityManager()->getConnection();
         $statment = $connection->executeQuery($query);

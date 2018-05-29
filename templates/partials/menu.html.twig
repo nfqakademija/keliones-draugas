@@ -40,29 +40,31 @@
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="directions" style="display: none">
-        <form class="form-inline my-2 my-lg-0">
-            <div class="row">
-                <div class="col-sm">
-                    <input class="form-control" placeholder="Where are you starting?" id="start">
-                </div>
+        <section class="main text-center">
+            <ul class="waypoints">
+                <li class="entry">
+                    <div class="wrap">
+                        <i class="fa fa-map-marker"></i>
+                        <input class="autocomplete" type="text" placeholder="Starting address or city" id="start">
+                        <i class="fa fa-bars move"></i>
+                    </div>
+                </li>
 
-                <b>Stops:</b> <br>
-                <select multiple id="waypoints">
-                    <option value="vilnius">vilnius</option>
-                    <option value="kaunas">kaunas</option>
-                    <option value="klaipeda">klaipeda</option>
-                </select>
-                <br>
+                <li class="entry">
+                    <div class="wrap">
+                        <i class="fa fa-map-marker"></i>
+                        <input class="autocomplete end" type="text" placeholder="Starting address or city">
+                        <i class="fa fa-bars move"></i>
+                    </div>
+                    <button class="remove">-</button>
+                    <button class="add">+</button>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-primary shadow" value="GO" id="submit">GO</button>
 
-                <div class="col-sm">
-                    <input class="form-control" placeholder="Where are you going?" id="end">
-                </div>
-
-                <button type="button" class="btn btn-outline-success my-2 my-sm-0" value="GO" id="submit">GO</button>
-                </div>
-                    <div id="directions-panel"></div>
-                </div>
-            </div>
-        </form>
+        </section>
+        {#<div class="submit">#}
+            {#<a href="directions" target="_blank"><i class="fa fa-location-arrow"></i>Click here to get the route</a>#}
+        {#</div>#}
     </nav>
 {% endblock %}

@@ -14,6 +14,8 @@ before_script:
   - bin/console doctrine:migrations:migrate --no-interaction
   - bin/console doctrine:fixtures:load --no-interaction --append
   - bin/console assets:install
+  - npm install
+  - npm run dev
   - bin/console cache:clear
   - bin/console cache:clear --env=test
 script:

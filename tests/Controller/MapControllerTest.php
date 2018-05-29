@@ -20,6 +20,7 @@ class MapControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
+        dump($client->getResponse()->getContent());
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertEquals(1, $crawler->filter('html:contains("Travel mate")')->count());
 

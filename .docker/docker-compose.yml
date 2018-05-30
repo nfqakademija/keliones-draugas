@@ -36,3 +36,11 @@ services:
     image: frontend.symfony
     volumes:
       - ../:/code
+
+  selenium.symfony:
+      container_name: selenium.symfony
+      image: selenium/standalone-chrome-debug
+      ports:
+      - 127.0.0.1:4444:4444 # To debug selenium API
+      - 127.0.0.1:5900:5900 # To connect via VNC
+

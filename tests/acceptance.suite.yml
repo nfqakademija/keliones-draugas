@@ -1,0 +1,6 @@
+actor: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: https://symfony.local:8443
+        - acceptance\Register

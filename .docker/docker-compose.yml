@@ -43,3 +43,4 @@ services:
       ports:
       - 127.0.0.1:4444:4444 # To debug selenium API
       - 127.0.0.1:5900:5900 # To connect via VNC
+

@@ -1,16 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: AI
- * Date: 29/05/2018
- * Time: 18:39
- */
-
 
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 
 class MapControllerTest extends WebTestCase
 {

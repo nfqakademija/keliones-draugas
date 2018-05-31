@@ -20,6 +20,7 @@ class CoordinateController extends Controller
      */
     public function index(CoordinateRepository $coordinateRepository): Response
     {
+
         return $this->render('coordinate/index.html.twig', ['coordinates' => $coordinateRepository->findAll()]);
     }
 
@@ -28,6 +29,8 @@ class CoordinateController extends Controller
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Unable to access this page!');
+
         $coordinate = new Coordinate();
         $form = $this->createForm(CoordinateType::class, $coordinate);
         $form->handleRequest($request);

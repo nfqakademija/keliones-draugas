@@ -39,7 +39,7 @@ class Coordinate
     /**
      * @ORM\Column(type="boolean")
      */
-    private $validated;
+    private $validated = true;
 
     /**
      * @var Thread|null

@@ -1,0 +1,70 @@
+{% block menu %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Travel mate</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/coordinate">Coordinates</a>
+                    </li>
+                    {% if  is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('coordinate_type_index') }}">Types</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <div id="testdrop"></div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="planTrip">Plan a trip</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" id="pac-input"  placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="directions" style="display: none">
+        <section class="main text-center">
+            <ul class="waypoints">
+                <li class="entry">
+                    <div class="wrap">
+                        <i class="fa fa-map-marker"></i>
+                        <input class="autocomplete" type="text" placeholder="Starting address or city" id="start">
+                        <i class="fa fa-bars move"></i>
+                    </div>
+                </li>
+
+                <li class="entry">
+                    <div class="wrap">
+                        <i class="fa fa-map-marker"></i>
+                        <input class="autocomplete end" type="text" placeholder="Starting address or city">
+                        <i class="fa fa-bars move"></i>
+                    </div>
+                    <button class="remove">-</button>
+                    <button class="add">+</button>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-primary shadow" value="GO" id="submit">GO</button>
+
+        </section>
+        {#<div class="submit">#}
+            {#<a href="directions" target="_blank"><i class="fa fa-location-arrow"></i>Click here to get the route</a>#}
+        {#</div>#}
+    </nav>
+{% endblock %}

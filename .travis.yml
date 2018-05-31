@@ -7,6 +7,16 @@ services:
 before_script:
 # Get the token from github and put it in travis repo under GITHUB_COMPOSER_AUTH ENV variable, then uncomment line below.
 #  - composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH
-  - composer install --no-interaction --prefer-dist
+  - composer install
+  - cp .env.travis.dist .env
+  - bin/console doctrine:database:drop --if-exists --force
+  - bin/console doctrine:database:create --if-not-exists
+  - bin/console doctrine:migrations:migrate --no-interaction
+  - bin/console doctrine:fixtures:load --no-interaction --append
+  - bin/console assets:install
+  - npm install
+  - npm run dev
+  - bin/console cache:clear --env=test
 script:
-  - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
+  - ./bin/phpunit
+  - ./vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src --ignore=./src/Migrations/*

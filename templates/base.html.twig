@@ -1,63 +1,27 @@
 <!DOCTYPE html>
 <html>
-
-    {% include 'partials/header.html.twig' %}
-
     <body>
-        <div id="wrap">
-            <div id="content">
-                <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
-                        <a class="navbar-brand js-scroll-trigger logo-style" href="/">Travel Mate</a>
-                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                            Menu
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarResponsive">
-                            <ul class="navbar-nav text-uppercase ml-auto">
+        {% block style %}
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+            <link rel="stylesheet" type="text/css" href="https://mapped.me/data/assets/css/app.min.css?ver=1.0.7">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        {% endblock %}
 
+        {% if app.request.requestUri == '/'  %}
+            {% include 'partials/menu.html.twig' %}
+        {% else %}
+            {% include 'partials/menu_slim.html.twig' %}
+        {% endif %}
 
-                                {% if app.user %}
-                                <li class="nav-item">
-                                    <a class="nav-link js-scroll-trigger" href="/logout">Log Out</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link js-scroll-trigger" href="/coordinate">Coordinates</a>
-                                </li>
+        {% block body %}
 
-                                    {% if  is_granted('ROLE_ADMIN') %}
-                                        <li class="nav-item">
-                                            <a class="nav-link js-scroll-trigger" href="{{ path('coordinate_type_index') }}">Types</a>
-                                        </li>
-                                    {% endif %}
+        {% endblock %}
 
-                                {% else %}
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="/login">Log In</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="/register">Register</a>
-                                    </li>
-                                {% endif %}
-
-
-                            </ul>
-                        </div>
-                </nav>
-
-
-                {% block body %}
-
-                {% endblock %}
-            </div>
-
-            {% include 'partials/footer.html.twig' %}
-
-            {% block javascripts %}
-                <script src="{{ asset('build/js/app.js') }}"></script>
-            {% endblock %}
-        </div>
+        {% block javascripts %}
+            <script src="{{ asset('build/js/app.js') }}"></script>
+            <script type="text/javascript" src="https://mapped.me/data/assets/js/jquery-2.1.4.min.js"></script>
+            <script type="text/javascript" src="https://mapped.me/data/assets/js/jquery-ui.min.js"></script>
+            <script type="text/javascript" src="https://mapped.me/data/assets/js/app.min.js?ver=1.0.7"></script>
+        {% endblock %}
     </body>
-
-
-
 </html>

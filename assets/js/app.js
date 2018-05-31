@@ -1,4 +1,5 @@
 require('bootstrap');
+require('js-marker-clusterer/src/markerclusterer.js');
 import './comments.js';
 
 let googleMapsLoader= require('google-maps');
@@ -6,7 +7,7 @@ googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
 googleMapsLoader.LIBRARIES = ['places'];
 
 var markers = [];
-
+var map;
 googleMapsLoader.load(function(google){
     var styledMapType = new google.maps.StyledMapType(
         [
@@ -302,7 +303,9 @@ googleMapsLoader.load(function(google){
         {name: 'Retro'}
     );
 
-    var map = new google.maps.Map(document.getElementById('googleMap'), {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(0,0),
         zoom: 12,
         mapTypeControlOptions: {
@@ -312,11 +315,15 @@ googleMapsLoader.load(function(google){
             position: google.maps.ControlPosition.BOTTOM_LEFT
         }
     });
+    directionsDisplay.setMap(map);
+    $(document).on('click', '#submit', function () {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+    });
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+    // map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     // Bias the SearchBox results towards current map's viewport.
     map.addListener('bounds_changed', function () {
@@ -384,55 +391,31 @@ googleMapsLoader.load(function(google){
         }, 500);
     });
 
-    if (navigator.geolocation) {
-        var infoWindow = new google.maps.InfoWindow;
-        
-        navigator.geolocation.getCurrentPosition(function(position) {
+    $.getJSON('https://geoip-db.com/json/')
+        .done (function(location) {
             var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+                lat: location.latitude,
+                lng: location.longitude,
             };
-
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
             map.setCenter(pos);
-        }, function() {
-            $.getJSON('https://geoip-db.com/json/')
-                .done (function(location) {
-                    var pos = {
-                        lat: location.latitude,
-                        lng: location.longitude,
-                    };
-                    infoWindow.open(map);
-                    map.setCenter(pos);
-                });
         });
-    }
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-    function CenterControl(controlDiv, map) {
-        var controlUI = document.createElement('div');
-        controlUI.style.cursor = 'pointer'
-        controlDiv.appendChild(controlUI);
-
-        var controlText = document.createElement('div');
-        controlText.innerHTML = generateDropdownForAllTypes();
-        controlUI.appendChild(controlText);
-        loadMarkersByType(google, map);
-    }
-
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map);
-
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+    var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), {
+            position: fenway,
+            pov: {
+                heading: 34,
+                pitch: 10
+            }
+        });
+    map.setStreetView(panorama);
 });
 
+var markerCluster;
 function getCoordinates( google, map ) {
-
     var typeArr = [];
     $('.form-check-input:checkbox:checked').each(function () {
         typeArr.push($(this).val());
@@ -458,14 +441,16 @@ function getCoordinates( google, map ) {
             for (i = 0; i < data.length; i++) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
-                    map: map
                 });
                 markers.push(marker);
             }
             for (i = 0; i < data.length; i++) {
                 var url = "/coordinate/" + data[i].id;
+                var waypoint = data[i].latitude + '_' + data[i].longitude;
+
                 infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
-                    "<div><a href="+url+">Plačiau</a></div>";
+                    "<div><a href="+url+">Details</a></div>"+
+                    "<div><button id=\"point\" value="+waypoint+">Add to route</button></div>";
 
                 var currentMarker = markers[i];
                 google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
@@ -476,9 +461,17 @@ function getCoordinates( google, map ) {
                 })(currentMarker, i));
             }
         }
-    );
+    )
+    // clusters
+        .done(function( data ) {
+            if (typeof markers !== 'undefined' && markers.length > 0) {
+                if (markerCluster) {
+                    markerCluster.clearMarkers();
+                }
+                markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: "15"});
+            }
+        });
 }
-
 function deleteCoordinates() {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
@@ -510,13 +503,81 @@ function loadMarkersByType(google, map) {
 function generateDropdownForAllTypes() {
     var dropdownInnerHTML = '';
     dropdownInnerHTML += '<div class="dropdown">\
-        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <button class="nav-link btn btn-outline-success dropdown-toggle" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
         Select type\
         </button>\
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
     //Foreach goes here:
     dropdownInnerHTML += GetTypes();
     dropdownInnerHTML += '</div></div>';
     return dropdownInnerHTML;
 }
+$('#testdrop').html(generateDropdownForAllTypes());
+$( ".dropdown-menu" ).change(function() {
+    loadMarkersByType(google, map);
+});
+
+//directions
+
+$(document).on('click', '#planTrip', function () {
+    $("#directions").toggle();
+});
+
+$(document).on('click', '#point', function () {
+    var pointCoordinates = $(this).val().replace('_', ',');
+    var destinationLength = $(".end").length;
+    $(".end").each(function(index){
+        if((index+1) != destinationLength) {
+            if ($(this).val().length === 0) {
+                $(this).val(pointCoordinates);
+            }
+        }else{
+            $(this).val(pointCoordinates);
+        }
+    });
+});
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    var waypts = [];
+    var destinationLength = $(".end").length;
+    $(".end").each(function(index){
+        if((index+1) != destinationLength) {
+            if ($(this).val().length !== 0) {
+                waypts.push({
+                    location: $(this).val(),
+                    stopover: true
+                });
+            }
+        }
+    });
+
+    var destination = $('.end').last().val();
+
+    directionsService.route({
+        origin: document.getElementById('start').value,
+        destination: destination,
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: 'DRIVING'
+    }, function(response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var summaryPanel = document.getElementById('directions-panel');
+            summaryPanel.innerHTML = '';
+            // For each route, display summary information.
+            for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+                    '</b><br>';
+                summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+            }
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
+
 

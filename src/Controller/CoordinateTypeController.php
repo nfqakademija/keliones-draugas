@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\CoordinateType;
 use App\Form\CoordinateType1Type;
 use App\Repository\CoordinateTypeRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/coordinate-type")
+ * @Security("has_role('ROLE_ADMIN')")
  */
 class CoordinateTypeController extends Controller
 {

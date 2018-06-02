@@ -1,6 +1,9 @@
 require('bootstrap');
 require('js-marker-clusterer/src/markerclusterer.js');
 import './comments.js';
+import './jquery-3.3.1'
+import './jquery-ui'
+import './directions';
 
 let googleMapsLoader= require('google-maps');
 googleMapsLoader.KEY='AIzaSyBD2c0P2K3jpSa98WUOkXIMXXEkwnx5CcY';
@@ -402,16 +405,6 @@ googleMapsLoader.load(function(google){
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-
-    var panorama = new google.maps.StreetViewPanorama(
-        document.getElementById('pano'), {
-            position: fenway,
-            pov: {
-                heading: 34,
-                pitch: 10
-            }
-        });
-    map.setStreetView(panorama);
 });
 
 var markerCluster;
@@ -562,18 +555,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     }, function(response, status) {
         if (status === 'OK') {
             directionsDisplay.setDirections(response);
-            var route = response.routes[0];
-            var summaryPanel = document.getElementById('directions-panel');
-            summaryPanel.innerHTML = '';
-            // For each route, display summary information.
-            for (var i = 0; i < route.legs.length; i++) {
-                var routeSegment = i + 1;
-                summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-                    '</b><br>';
-                summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-                summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-                summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-            }
         } else {
             window.alert('Directions request failed due to ' + status);
         }

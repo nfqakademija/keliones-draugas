@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class CoordinateType extends AbstractType
 {
@@ -22,6 +23,7 @@ class CoordinateType extends AbstractType
                 'choice_label' => 'type',
             ))
             ->add('coordinateNote')
+            ->add('image', FileType::class, array('label' => 'Image'))
         ;
     }
 

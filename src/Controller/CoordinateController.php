@@ -39,7 +39,7 @@ class CoordinateController extends Controller
             $em->persist($coordinate);
             $em->flush();
 
-            return $this->redirectToRoute('coordinate_index');
+            return $this->redirectToRoute('coordinate_show', ['id' => $coordinate->getId()]);
         }
 
         return $this->render('coordinate/new.html.twig', [

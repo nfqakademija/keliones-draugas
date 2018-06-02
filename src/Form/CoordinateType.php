@@ -21,6 +21,7 @@ class CoordinateType extends AbstractType
                 'class' => \App\Entity\CoordinateType::class,
                 'choice_label' => 'type',
             ))
+            ->add('coordinateNote')
         ;
     }
 

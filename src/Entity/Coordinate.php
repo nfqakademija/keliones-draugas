@@ -73,6 +73,27 @@ class Coordinate
     private $coordinateType;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $coordinateNote;
+
+    /**
+     * @return mixed
+     */
+    public function getCoordinateNote()
+    {
+        return $this->coordinateNote;
+    }
+
+    /**
+     * @param mixed $coordinateNote
+     */
+    public function setCoordinateNote($coordinateNote): void
+    {
+        $this->coordinateNote = $coordinateNote;
+    }
+
+    /**
      * @return CoordinateType
      */
     public function getCoordinateType(): ?CoordinateType

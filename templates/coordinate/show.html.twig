@@ -8,7 +8,7 @@
         {{ include('coordinate/_delete_form.html.twig') }}
 
 
-            <table class="table">
+        <table class="table">
             <tbody>
                 <tr>
                     <th>Id</th>
@@ -32,6 +32,12 @@
                 </tr>
             </tbody>
         </table>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Note</h1>
+                <p class="lead">{{ coordinate.coordinateNote }}</p>
+            </div>
+        </div>
 
         <a class="btn btn-primary m-3" href="{{ path('coordinate_index') }}">Back to list</a>
         <a class="btn btn-primary m-3" href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>

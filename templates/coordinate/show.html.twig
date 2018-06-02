@@ -7,7 +7,7 @@
         <h1 class="m-4">{{ coordinate.name }}</h1>
         {{ include('coordinate/_delete_form.html.twig') }}
 
-
+        <a href="{{ asset('uploads/images/' ~ coordinate.image) }}">View image</a>
         <table class="table">
             <tbody>
                 <tr>

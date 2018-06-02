@@ -13,6 +13,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/coordinate">Coordinates</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/coordinate/new">Add new location</a>
+                    </li>
+
                     {% if  is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('coordinate_type_index') }}">Types</a>

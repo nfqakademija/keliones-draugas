@@ -15,53 +15,89 @@ googleMapsLoader.load(function(google){
     var styledMapType = new google.maps.StyledMapType(
         [
             {
-                "featureType": "water",
-                "elementType": "geometry",
+                "featureType": "administrative.locality",
+                "elementType": "all",
                 "stylers": [
                     {
-                        "hue": "#165c64"
+                        "hue": "#2c2e33"
                     },
                     {
-                        "saturation": 34
+                        "saturation": 7
                     },
                     {
-                        "lightness": -69
+                        "lightness": 19
                     },
                     {
                         "visibility": "on"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.locality",
+                "elementType": "labels.text",
+                "stylers": [
+                    {
+                        "visibility": "on"
+                    },
+                    {
+                        "saturation": "-3"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.locality",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#f39247"
                     }
                 ]
             },
             {
                 "featureType": "landscape",
-                "elementType": "geometry",
+                "elementType": "all",
                 "stylers": [
                     {
-                        "hue": "#b7caaa"
+                        "hue": "#ffffff"
                     },
                     {
-                        "saturation": -14
+                        "saturation": -100
                     },
                     {
-                        "lightness": -18
+                        "lightness": 100
                     },
                     {
-                        "visibility": "on"
+                        "visibility": "simplified"
                     }
                 ]
             },
             {
-                "featureType": "landscape.man_made",
+                "featureType": "poi",
                 "elementType": "all",
                 "stylers": [
                     {
-                        "hue": "#cbdac1"
+                        "hue": "#ffffff"
                     },
                     {
-                        "saturation": -6
+                        "saturation": -100
                     },
                     {
-                        "lightness": -9
+                        "lightness": 100
+                    },
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.school",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#f39247"
+                    },
+                    {
+                        "saturation": "0"
                     },
                     {
                         "visibility": "on"
@@ -73,13 +109,43 @@ googleMapsLoader.load(function(google){
                 "elementType": "geometry",
                 "stylers": [
                     {
-                        "hue": "#8d9b83"
+                        "hue": "#ff6f00"
                     },
                     {
-                        "saturation": 89
+                        "saturation": "100"
                     },
                     {
-                        "lightness": 22
+                        "lightness": 31
+                    },
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#f39247"
+                    },
+                    {
+                        "saturation": "0"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "hue": "#008eff"
+                    },
+                    {
+                        "saturation": -93
+                    },
+                    {
+                        "lightness": 31
                     },
                     {
                         "visibility": "on"
@@ -87,17 +153,32 @@ googleMapsLoader.load(function(google){
                 ]
             },
             {
-                "featureType": "road.highway",
-                "elementType": "geometry",
+                "featureType": "road.arterial",
+                "elementType": "geometry.stroke",
                 "stylers": [
                     {
-                        "hue": "#d4dad0"
+                        "visibility": "on"
                     },
                     {
-                        "saturation": -88
+                        "color": "#f3dbc8"
                     },
                     {
-                        "lightness": 54
+                        "saturation": "0"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "hue": "#bbc0c4"
+                    },
+                    {
+                        "saturation": -93
+                    },
+                    {
+                        "lightness": -2
                     },
                     {
                         "visibility": "simplified"
@@ -106,19 +187,10 @@ googleMapsLoader.load(function(google){
             },
             {
                 "featureType": "road.arterial",
-                "elementType": "geometry",
+                "elementType": "labels.text",
                 "stylers": [
                     {
-                        "hue": "#bdc5b6"
-                    },
-                    {
-                        "saturation": -89
-                    },
-                    {
-                        "lightness": -3
-                    },
-                    {
-                        "visibility": "simplified"
+                        "visibility": "off"
                     }
                 ]
             },
@@ -127,183 +199,57 @@ googleMapsLoader.load(function(google){
                 "elementType": "geometry",
                 "stylers": [
                     {
-                        "hue": "#bdc5b6"
+                        "hue": "#e9ebed"
                     },
                     {
-                        "saturation": -89
+                        "saturation": -90
                     },
                     {
-                        "lightness": -26
+                        "lightness": -8
                     },
                     {
-                        "visibility": "on"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "hue": "#c17118"
-                    },
-                    {
-                        "saturation": 61
-                    },
-                    {
-                        "lightness": -45
-                    },
-                    {
-                        "visibility": "on"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "hue": "#8ba975"
-                    },
-                    {
-                        "saturation": -46
-                    },
-                    {
-                        "lightness": -28
-                    },
-                    {
-                        "visibility": "on"
+                        "visibility": "simplified"
                     }
                 ]
             },
             {
                 "featureType": "transit",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "hue": "#a43218"
-                    },
-                    {
-                        "saturation": 74
-                    },
-                    {
-                        "lightness": -51
-                    },
-                    {
-                        "visibility": "simplified"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.province",
                 "elementType": "all",
                 "stylers": [
                     {
-                        "hue": "#ffffff"
+                        "hue": "#e9ebed"
                     },
                     {
-                        "saturation": 0
+                        "saturation": 10
                     },
                     {
-                        "lightness": 100
-                    },
-                    {
-                        "visibility": "simplified"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.neighborhood",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "hue": "#ffffff"
-                    },
-                    {
-                        "saturation": 0
-                    },
-                    {
-                        "lightness": 100
-                    },
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.locality",
-                "elementType": "labels",
-                "stylers": [
-                    {
-                        "hue": "#ffffff"
-                    },
-                    {
-                        "saturation": 0
-                    },
-                    {
-                        "lightness": 100
-                    },
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.land_parcel",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "hue": "#ffffff"
-                    },
-                    {
-                        "saturation": 0
-                    },
-                    {
-                        "lightness": 100
-                    },
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "hue": "#3a3935"
-                    },
-                    {
-                        "saturation": 5
-                    },
-                    {
-                        "lightness": -57
-                    },
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.medical",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "hue": "#cba923"
-                    },
-                    {
-                        "saturation": 50
-                    },
-                    {
-                        "lightness": -46
+                        "lightness": 69
                     },
                     {
                         "visibility": "on"
                     }
                 ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
+                    {
+                        "hue": "#e9ebed"
+                    },
+                    {
+                        "saturation": -78
+                    },
+                    {
+                        "lightness": 67
+                    },
+                    {
+                        "visibility": "simplified"
+                    }
+                ]
             }
         ],
-        {name: 'Retro'}
+        {name: 'Orange'}
     );
 
     var directionsService = new google.maps.DirectionsService;
@@ -311,6 +257,11 @@ googleMapsLoader.load(function(google){
     map = new google.maps.Map(document.getElementById('googleMap'), {
         center: new google.maps.LatLng(0,0),
         zoom: 12,
+        streetViewControl: false,
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_TOP
+        },
         mapTypeControlOptions: {
             mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
                 'styled_map'],

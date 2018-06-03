@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Repository\CoordinateRepository;
 
 class MapController extends Controller
 {
-     /**
+    /**
      * @Route("/")
-      */
-    public function mapAction(CoordinateRepository $repository)
+     * @Method("GET")
+     */
+    public function mapAction()
     {
         return $this->render('map.html.twig');
     }

@@ -447,7 +447,7 @@ function loadMarkersByType(google, map) {
 function generateDropdownForAllTypes() {
     var dropdownInnerHTML = '';
     dropdownInnerHTML += '<div class="dropdown">\
-        <button class="nav-link btn btn-outline-success dropdown-toggle" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <button class="nav-link btn dropdown-toggle" style="background-color:#FF9F1C;" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
         Select type\
         </button>\
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">';

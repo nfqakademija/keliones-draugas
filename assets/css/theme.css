@@ -77,3 +77,10 @@ html, body {
     }
 }
 
+#directions > section {
+    padding: 0 0;
+}
+
+#directions > section > ul {
+    margin-bottom: 0;
+}

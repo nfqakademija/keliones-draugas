@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MapCoordinateController extends Controller
 {
      /**
-     * @Route("/mapcoordinate")
+     * @Route("/mapcoordinate", condition="request.isXmlHttpRequest()")
       */
     public function showCoordinateAction(CoordinateRepository $repository, Request $request)
     {

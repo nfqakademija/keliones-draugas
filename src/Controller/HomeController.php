@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class HomeController extends Controller
 {
     /**
-     * @Route("/get-types")
+     * @Route("/get-types", condition="request.isXmlHttpRequest()")
      */
     public function getCoordinateTypes(CoordinateRepository $repository)
     {

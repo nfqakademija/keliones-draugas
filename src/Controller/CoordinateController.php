@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Coordinate;
 use App\Form\CoordinateType;
 use App\Repository\CoordinateRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoordinateController extends Controller
 {
     /**
-     * @Route("/", name="coordinate_index", methods="GET")
+     * @Route("/", name="coordinate_index")
+     * @Method("GET")
      */
     public function index(CoordinateRepository $coordinateRepository): Response
     {
@@ -26,7 +28,8 @@ class CoordinateController extends Controller
     }
 
     /**
-     * @Route("/new", name="coordinate_new", methods="GET|POST")
+     * @Route("/new", name="coordinate_new")
+     * @Method({"GET", "POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,7 +52,8 @@ class CoordinateController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="coordinate_show", methods="GET")
+     * @Route("/{id}", name="coordinate_show")
+     * @Method("GET")
      */
     public function show(Coordinate $coordinate, Request $request): Response
     {
@@ -68,7 +72,8 @@ class CoordinateController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="coordinate_edit", methods="GET|POST")
+     * @Route("/{id}/edit", name="coordinate_edit")
+     * @Method({"GET", "POST"})
      */
     public function edit(Request $request, Coordinate $coordinate): Response
     {
@@ -88,7 +93,8 @@ class CoordinateController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="coordinate_delete", methods="DELETE")
+     * @Route("/{id}", name="coordinate_delete")
+     * @Method("DELETE")
      */
     public function delete(Request $request, Coordinate $coordinate): Response
     {

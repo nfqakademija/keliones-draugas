@@ -15,6 +15,8 @@ class UserFixtures extends Fixture
         $newUser->setEmail("admin@admin.lt");
         $newUser->setPlainPassword("admin");
         $newUser->setRoles(array('ROLE_ADMIN'));
+        $newUser->setEnabled(true);
+        $this->addReference('admin_user', $newUser);
 
         $manager->persist($newUser);
 
@@ -23,6 +25,8 @@ class UserFixtures extends Fixture
         $newUser->setEmail("user@user.lt");
         $newUser->setPlainPassword("user");
         $newUser->setRoles(array('ROLE_USER'));
+        $newUser->setEnabled(true);
+        $this->addReference('simple_user', $newUser);
 
         $manager->persist($newUser);
         $manager->flush();

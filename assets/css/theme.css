@@ -77,10 +77,12 @@ html, body {
     }
 }
 
+#coordinate_imageFile_file{
+    opacity: unset;
+}
 #directions > section {
     padding: 0 0;
 }
-
 #directions > section > ul {
     margin-bottom: 0;
 }

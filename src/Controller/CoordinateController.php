@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -33,7 +34,7 @@ class CoordinateController extends Controller
      */
     public function new(Request $request): Response
     {
-        $coordinate = new Coordinate();
+        $coordinate = new Coordinate($this->getUser());
         $form = $this->createForm(CoordinateType::class, $coordinate);
         $form->handleRequest($request);
 
@@ -77,6 +78,10 @@ class CoordinateController extends Controller
      */
     public function edit(Request $request, Coordinate $coordinate): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN', $this->getUser()) && $coordinate->getUser() !== $this->getUser()) {
+            throw new AccessDeniedHttpException();
+        }
+
         $form = $this->createForm(CoordinateType::class, $coordinate);
         $form->handleRequest($request);
 
@@ -98,6 +103,10 @@ class CoordinateController extends Controller
      */
     public function delete(Request $request, Coordinate $coordinate): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN', $this->getUser()) && $coordinate->getUser() !== $this->getUser()) {
+            throw new AccessDeniedHttpException();
+        }
+
         if ($this->isCsrfTokenValid('delete'.$coordinate->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($coordinate);

@@ -77,3 +77,6 @@ html, body {
     }
 }
 
+#coordinate_imageFile_file{
+    opacity: unset;
+}

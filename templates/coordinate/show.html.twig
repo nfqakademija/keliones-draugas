@@ -8,6 +8,8 @@
         {{ include('coordinate/_delete_form.html.twig') }}
 
 
+        <img src="{{ vich_uploader_asset(coordinate, 'imageFile') }}" alt="{{ coordinate.imageName }}" />
+
         <table class="table">
             <tbody>
                 <tr>

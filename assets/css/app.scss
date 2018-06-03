@@ -1,6 +1,10 @@
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+
+@import "~font-awesome/scss/font-awesome";
+$fa-font-path: "~font-awesome/fonts";
+
 @import "~startbootstrap-agency/css/agency.css";
 @import "~startbootstrap-agency/vendor/font-awesome/css/font-awesome.css";
 @import "./theme.css";

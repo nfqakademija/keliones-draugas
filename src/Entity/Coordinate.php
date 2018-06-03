@@ -288,6 +288,4 @@ class Coordinate
         $this->user = $user;
         return $this;
     }
-
-
 }

@@ -81,5 +81,4 @@ class User extends BaseUser
         $this->coordinates->removeElement($coordinate);
         return $this;
     }
-
 }

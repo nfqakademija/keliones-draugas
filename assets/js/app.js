@@ -426,7 +426,7 @@ function deleteCoordinates() {
 function GetTypes(data){
     var types = '';
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "get-types",
         async: false,
         success: function(data) {

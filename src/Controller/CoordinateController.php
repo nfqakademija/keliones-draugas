@@ -73,8 +73,6 @@ class CoordinateController extends Controller
      */
     public function edit(Request $request, Coordinate $coordinate): Response
     {
-//        dump($this->isGranted('ROLE_ADMIN', $this->getUser()), $coordinate->getUser(), $this->getUser());
-//        die();
         if (!$this->isGranted('ROLE_ADMIN', $this->getUser()) && $coordinate->getUser() !== $this->getUser()) {
             throw new AccessDeniedHttpException();
         }

@@ -30,7 +30,9 @@
                     <td>
                         <a href="{{ path('coordinate_show', {'id': coordinate.id}) }}">More</a>
                         <span> | </span>
-                        <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+                        {% if is_granted('ROLE_ADMIN') or app.user.id == coordinate.user.id %}
+                            <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}

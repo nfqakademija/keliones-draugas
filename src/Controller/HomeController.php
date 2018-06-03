@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CoordinateRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends Controller
 {
     /**
-     * @Route("/get-types")
+     * @Route("/get-types", condition="request.isXmlHttpRequest()")
+     * @Method("GET")
      */
     public function getCoordinateTypes(CoordinateRepository $repository)
     {

@@ -44,5 +44,5 @@ npm-debug.log
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 
-/public/images/coordinateimages/*
-!/public/images/coordinateimages/.gitkeep
+/public/images/uploads/*
+!/public/images/uploads/.gitkeep

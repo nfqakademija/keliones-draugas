@@ -422,11 +422,10 @@ function deleteCoordinates() {
     }
     markers = [];
 }
-
 function GetTypes(data){
     var types = '';
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "get-types",
         async: false,
         success: function(data) {
@@ -437,7 +436,6 @@ function GetTypes(data){
     });
     return types;
 }
-
 function loadMarkersByType(google, map) {
     $(document).on('click', '.type-checkbox', function () {
         getCoordinates(google, map);

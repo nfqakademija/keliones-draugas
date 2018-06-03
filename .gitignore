@@ -43,3 +43,6 @@ npm-debug.log
 .phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+/public/images/uploads/*
+!/public/images/uploads/.gitkeep

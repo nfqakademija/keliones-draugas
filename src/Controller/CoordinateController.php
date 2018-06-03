@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Coordinate;
 use App\Form\CoordinateType;
 use App\Repository\CoordinateRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/coordinate")
+ * @Security("has_role('ROLE_USER')")
  */
 class CoordinateController extends Controller
 {
@@ -37,7 +39,7 @@ class CoordinateController extends Controller
             $em->persist($coordinate);
             $em->flush();
 
-            return $this->redirectToRoute('coordinate_index');
+            return $this->redirectToRoute('coordinate_show', ['id' => $coordinate->getId()]);
         }
 
         return $this->render('coordinate/new.html.twig', [

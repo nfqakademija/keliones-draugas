@@ -1,6 +1,6 @@
 {% block menu %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Travel mate</a>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="/"><img src="{{ asset('/images/location-marker-svgrepo-com.svg') }}" width="30" height="30" class="d-inline-block align-top" alt=""> Travel mate</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,6 +12,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/coordinate">Coordinates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/coordinate/new">Add new location</a>
                     </li>
                     {% if  is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
@@ -35,7 +38,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" id="pac-input"  placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline my-2 my-sm-0" style="background-color: #FF9F1C;" type="submit">Search</button>
             </form>
         </div>
     </nav>

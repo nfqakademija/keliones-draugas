@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CoordinateType extends AbstractType
 {
@@ -21,6 +22,13 @@ class CoordinateType extends AbstractType
                 'class' => \App\Entity\CoordinateType::class,
                 'choice_label' => 'type',
             ))
+            ->add('coordinateNote')
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'download_uri' => false,
+                'image_uri' => true
+            ]);
         ;
     }
 

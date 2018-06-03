@@ -55,7 +55,7 @@ class Coordinate
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="products", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="coordinate", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
      */

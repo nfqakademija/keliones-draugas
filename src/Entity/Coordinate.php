@@ -82,6 +82,11 @@ class Coordinate
      */
     private $updatedAt;
 
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * @return boolean
      */
@@ -109,6 +114,13 @@ class Coordinate
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $coordinateNote;
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="coordinates")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     /**
      * @return mixed
@@ -258,4 +270,24 @@ class Coordinate
     {
         return $this->imageSize;
     }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Coordinate
+     */
+    public function setUser(User $user): Coordinate
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+
 }

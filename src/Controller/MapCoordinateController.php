@@ -14,7 +14,7 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 class MapCoordinateController extends Controller
 {
     /**
-     * @Route("/mapcoordinate")
+     * @Route("/mapcoordinate", condition="request.isXmlHttpRequest()")
      * @Method("GET")
      */
     public function showCoordinateAction(CoordinateRepository $repository, Request $request, UploaderHelper $helper)

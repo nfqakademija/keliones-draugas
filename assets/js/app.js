@@ -394,12 +394,16 @@ function getCoordinates( google, map ) {
 
                 infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
                     "<div><a href="+url+">Details</a></div>"+
-                    "<div><button id=\"point\" value="+waypoint+">Add to route</button></div>";
+                    "<div><button class='btn' id=\"point\" value="+waypoint+">Add to route</button></div>";
+                if (data[i].imageName) {
+                    infoWindowContent[i] = infoWindowContent[i] +
+                        "<img src='" + data[i].imageName + "' height=\"80\" width=\"80\"/>";
+                }
 
                 var currentMarker = markers[i];
                 google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
                     return function() {
-                        infowindow.setContent(infoWindowContent[i]);
+                        infowindow.setContent("<div class='info-window'>"+infoWindowContent[i]+"</div>");
                         infowindow.open(map, currentMarker);
                     }
                 })(currentMarker, i));
@@ -509,5 +513,3 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         }
     });
 }
-
-

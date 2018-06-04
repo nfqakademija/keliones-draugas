@@ -84,3 +84,16 @@ html, body {
 #directions > section > ul {
     margin-bottom: 0;
 }
+
+.info-window{
+    text-align: center;
+}
+
+#point{
+    border: none;
+    background-color: #FF9F1C;
+}
+
+.gm-style img{
+    margin-top: 5px;
+}

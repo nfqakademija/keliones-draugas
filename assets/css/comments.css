@@ -7,6 +7,10 @@
  * with this source code in the file LICENSE.
  */
 
+.fos_comment_comment_replies {
+    padding-left: 0.5em;
+}
+
 .fos_comment_thread_show {
     margin-top: 2em;
     padding: 1em 20px;

@@ -20,7 +20,7 @@ class User extends BaseUser
 
     /**
      * @var Coordinate[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Coordinate", mappedBy="coordinateType")
+     * @ORM\OneToMany(targetEntity="App\Entity\Coordinate", mappedBy="user")
      */
     private $coordinates;
 

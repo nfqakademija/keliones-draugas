@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 
-
 /**
  * @Route("/coordinate-type")
  * @Security("has_role('ROLE_ADMIN')")

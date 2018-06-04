@@ -345,14 +345,23 @@ googleMapsLoader.load(function(google){
         }, 500);
     });
 
-    $.getJSON('https://geoip-db.com/json/')
-        .done (function(location) {
-            var pos = {
-                lat: location.latitude,
-                lng: location.longitude,
-            };
-            map.setCenter(pos);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            map.setCenter({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
+        }, function() {
+            $.getJSON('https://geoip-db.com/json/')
+                .done (function(location) {
+                    map.setCenter({
+                        lat: location.latitude,
+                        lng: location.longitude,
+                    });
+                });
+
         });
+    }
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
@@ -436,11 +445,6 @@ function GetTypes(data){
     });
     return types;
 }
-function loadMarkersByType(google, map) {
-    $(document).on('click', '.type-checkbox', function () {
-        getCoordinates(google, map);
-    });
-}
 
 function generateDropdownForAllTypes() {
     var dropdownInnerHTML = '';
@@ -455,8 +459,8 @@ function generateDropdownForAllTypes() {
     return dropdownInnerHTML;
 }
 $('#testdrop').html(generateDropdownForAllTypes());
-$( ".dropdown-menu" ).change(function() {
-    loadMarkersByType(google, map);
+$(document).on('click', '.type-checkbox', function () {
+    getCoordinates(google, map);
 });
 
 //directions

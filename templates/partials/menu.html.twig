@@ -11,9 +11,6 @@
                         <a class="nav-link" href="/logout">Log Out</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/coordinate">Coordinates</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/coordinate/new">Add new location</a>
                     </li>
                     {% if  is_granted('ROLE_ADMIN') %}
@@ -29,6 +26,9 @@
                         <a class="nav-link" href="/register">Register</a>
                     </li>
                 {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/coordinate">Coordinates</a>
+                </li>
                 <li class="nav-item dropdown">
                     <div id="testdrop"></div>
                 </li>

@@ -17,7 +17,6 @@ use Pagerfanta\Pagerfanta;
 
 /**
  * @Route("/coordinate")
- * @Security("has_role('ROLE_USER')")
  */
 class CoordinateController extends Controller
 {

@@ -35,5 +35,13 @@ class MapCoordinateController extends Controller
                  $typeIds
              )
          );
+
+        foreach ($coordinates as $key => $coordinate) {
+            if ($coordinate['imageName'] !== null) {
+                $coordinates[$key]['imageName'] = $helper->asset($coordinate, 'imageFile', Coordinate::class);
+            }
+        }
+
+        return new JsonResponse($coordinates);
     }
 }

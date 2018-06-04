@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @Route("/coordinate")
@@ -23,9 +25,16 @@ class CoordinateController extends Controller
      * @Route("/", name="coordinate_index")
      * @Method("GET")
      */
-    public function index(CoordinateRepository $coordinateRepository): Response
+    public function index(Request $request, CoordinateRepository $coordinateRepository): Response
     {
-        return $this->render('coordinate/index.html.twig', ['coordinates' => $coordinateRepository->findAll()]);
+        $adapter = new DoctrineORMAdapter($coordinateRepository->createQueryBuilder('c'));
+        $pager = new Pagerfanta($adapter);
+        $pager->setCurrentPage($request->query->getInt('page', 1));
+
+        return $this->render(
+            'coordinate/index.html.twig',
+            ['coordinates_pager' => $pager]
+        );
     }
 
     /**

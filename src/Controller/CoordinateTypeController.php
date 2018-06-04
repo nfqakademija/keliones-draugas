@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+
 
 /**
  * @Route("/coordinate-type")
@@ -19,14 +22,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoordinateTypeController extends Controller
 {
     /**
-     * @Route("/", name="coordinate_type_index", methods="GET")
+     * @Route("/", name="coordinate_type_index")
      * @Method("GET")
      */
-    public function index(CoordinateTypeRepository $coordinateTypeRepository): Response
+    public function index(Request $request, CoordinateTypeRepository $coordinateTypeRepository): Response
     {
+        $adapter = new DoctrineORMAdapter($coordinateTypeRepository->createQueryBuilder('c'));
+        $pager = new Pagerfanta($adapter);
+        $pager->setCurrentPage($request->query->getInt('page', 1));
+
         return $this->render(
             'coordinate_type/index.html.twig',
-            ['coordinate_types' => $coordinateTypeRepository->findAll()]
+            ['coordinate_type_pager' => $pager]
         );
     }
 

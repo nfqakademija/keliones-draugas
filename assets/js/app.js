@@ -397,7 +397,7 @@ function getCoordinates( google, map ) {
                     "<div><button id=\"point\" value="+waypoint+">Add to route</button></div>";
                 if (data[i].imageName) {
                         infoWindowContent[i] = infoWindowContent[i] +
-                            "<img src='images/uploads/coordinateimages/" + data[i].imageName + "' height=\"80\" width=\"80\"/>";
+                            "<img src='" + data[i].imageName + "' height=\"80\" width=\"80\"/>";
                     }
 
                 var currentMarker = markers[i];

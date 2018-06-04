@@ -396,8 +396,7 @@ function getCoordinates( google, map ) {
                     position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
                 });
                 markers.push(marker);
-            }
-            for (i = 0; i < data.length; i++) {
+
                 var url = "/coordinate/" + data[i].id;
                 var waypoint = data[i].latitude + '_' + data[i].longitude;
 
@@ -409,7 +408,7 @@ function getCoordinates( google, map ) {
                             "<img src='" + data[i].imageName + "' height=\"80\" width=\"80\"/>";
                     }
 
-                var currentMarker = markers[i];
+                var currentMarker = marker;
                 google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
                     return function() {
                         infowindow.setContent("<div class='info-window'>"+infoWindowContent[i]+"</div>");
@@ -417,17 +416,15 @@ function getCoordinates( google, map ) {
                     }
                 })(currentMarker, i));
             }
-        }
-    )
-    // clusters
-        .done(function( data ) {
+
             if (typeof markers !== 'undefined' && markers.length > 0) {
                 if (markerCluster) {
                     markerCluster.clearMarkers();
                 }
                 markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: "15"});
             }
-        });
+        }
+    );
 }
 function deleteCoordinates() {
     for (var i = 0; i < markers.length; i++) {

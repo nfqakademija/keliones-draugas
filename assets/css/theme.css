@@ -86,3 +86,7 @@ html, body {
 #directions > section > ul {
     margin-bottom: 0;
 }
+
+.info-window{
+    text-align: center;
+}

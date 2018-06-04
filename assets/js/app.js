@@ -345,14 +345,23 @@ googleMapsLoader.load(function(google){
         }, 500);
     });
 
-    $.getJSON('https://geoip-db.com/json/')
-        .done (function(location) {
-            var pos = {
-                lat: location.latitude,
-                lng: location.longitude,
-            };
-            map.setCenter(pos);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            map.setCenter({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
+        }, function() {
+            $.getJSON('https://geoip-db.com/json/')
+                .done (function(location) {
+                    map.setCenter({
+                        lat: location.latitude,
+                        lng: location.longitude,
+                    });
+                });
+
         });
+    }
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
@@ -395,11 +404,15 @@ function getCoordinates( google, map ) {
                 infoWindowContent[i] = "<h5>" + data[i].name + "</h5>" +
                     "<div><a href="+url+">Details</a></div>"+
                     "<div><button id=\"point\" value="+waypoint+">Add to route</button></div>";
+                if (data[i].imageName) {
+                        infoWindowContent[i] = infoWindowContent[i] +
+                            "<img src='" + data[i].imageName + "' height=\"80\" width=\"80\"/>";
+                    }
 
                 var currentMarker = markers[i];
                 google.maps.event.addListener(currentMarker, 'click', (function(currentMarker, i) {
                     return function() {
-                        infowindow.setContent(infoWindowContent[i]);
+                        infowindow.setContent("<div class='info-window'>"+infoWindowContent[i]+"</div>");
                         infowindow.open(map, currentMarker);
                     }
                 })(currentMarker, i));
@@ -436,11 +449,6 @@ function GetTypes(data){
     });
     return types;
 }
-function loadMarkersByType(google, map) {
-    $(document).on('click', '.type-checkbox', function () {
-        getCoordinates(google, map);
-    });
-}
 
 function generateDropdownForAllTypes() {
     var dropdownInnerHTML = '';
@@ -455,8 +463,8 @@ function generateDropdownForAllTypes() {
     return dropdownInnerHTML;
 }
 $('#testdrop').html(generateDropdownForAllTypes());
-$( ".dropdown-menu" ).change(function() {
-    loadMarkersByType(google, map);
+$(document).on('click', '.type-checkbox', function () {
+    getCoordinates(google, map);
 });
 
 //directions

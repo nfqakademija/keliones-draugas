@@ -10,7 +10,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Type</th>
                     <th>Actions</th>
                 </tr>
@@ -18,7 +17,6 @@
             <tbody>
             {% for coordinate_type in coordinate_types %}
                 <tr>
-                    <td>{{ coordinate_type.id }}</td>
                     <td>{{ coordinate_type.type }}</td>
                     <td>
                         <a href="{{ path('coordinate_type_show', {'id': coordinate_type.id}) }}">More</a>

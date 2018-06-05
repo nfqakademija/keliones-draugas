@@ -17,7 +17,6 @@ use Pagerfanta\Pagerfanta;
 
 /**
  * @Route("/coordinate")
- * @Security("has_role('ROLE_USER')")
  */
 class CoordinateController extends Controller
 {
@@ -40,6 +39,7 @@ class CoordinateController extends Controller
     /**
      * @Route("/new", name="coordinate_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function new(Request $request): Response
     {
@@ -84,6 +84,7 @@ class CoordinateController extends Controller
     /**
      * @Route("/{id}/edit", name="coordinate_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function edit(Request $request, Coordinate $coordinate): Response
     {
@@ -109,6 +110,7 @@ class CoordinateController extends Controller
     /**
      * @Route("/{id}", name="coordinate_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_USER')")
      */
     public function delete(Request $request, Coordinate $coordinate): Response
     {

@@ -5,9 +5,9 @@
 {% block body %}
     <div class="container">
         <h1 class="m-4">Coordinate list</h1>
-
-        <a class="btn btn-primary m-3" href="{{ path('coordinate_new') }}">Create new coordinate</a>
-
+        {% if app.user %}
+            <a class="btn btn-primary m-3" href="{{ path('coordinate_new') }}">Create new coordinate</a>
+        {% endif %}
         <table class="table">
             <thead>
             <tr>
@@ -28,8 +28,10 @@
                     <td>
                         <a href="{{ path('coordinate_show', {'id': coordinate.id}) }}">More</a>
                         <span> | </span>
-                        {% if is_granted('ROLE_ADMIN') or app.user.id == coordinate.user.id %}
-                            <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+                        {% if app.user %}
+                            {% if is_granted('ROLE_ADMIN') or app.user.id == coordinate.user.id %}
+                                <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+                            {% endif %}
                         {% endif %}
                     </td>
                 </tr>

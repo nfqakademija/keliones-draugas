@@ -51,7 +51,11 @@ class CoordinateRepository extends ServiceEntityRepository
 
     public function getTypes()
     {
-        $query = 'select id, type from coordinate_type ORDER BY type ASC;';
+        $query = 'SELECT ct.id, ct.type
+              FROM coordinate_type ct
+              INNER JOIN coordinate c ON ct.id = c.coordinate_type_id
+              GROUP BY ct.id
+              ORDER BY type ASC;';
         $connection = $this->getEntityManager()->getConnection();
         $statment = $connection->executeQuery($query);
         return $statment->fetchAll();

@@ -386,6 +386,9 @@ function getCoordinates( google, map ) {
         },
         function( data ) {
             deleteCoordinates();
+            if (markerCluster) {
+                markerCluster.clearMarkers();
+            }
 
             var infowindow = new google.maps.InfoWindow();
 

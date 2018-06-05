@@ -3,26 +3,24 @@
 {% block title %}Coordinate list{% endblock %}
 
 {% block body %}
-        <div class="container">
+    <div class="container">
         <h1 class="m-4">Coordinate list</h1>
 
         <a class="btn btn-primary m-3" href="{{ path('coordinate_new') }}">Create new coordinate</a>
 
         <table class="table">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>Actions</th>
-                </tr>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-            {% for coordinate in coordinates %}
+            {% for coordinate in coordinates_pager.currentPageResults %}
                 <tr>
-                    <td>{{ coordinate.id }}</td>
                     <td>{{ coordinate.name }}</td>
                     <td>{{ coordinate.address }}</td>
                     <td>{{ coordinate.latitude }}</td>
@@ -30,7 +28,9 @@
                     <td>
                         <a href="{{ path('coordinate_show', {'id': coordinate.id}) }}">More</a>
                         <span> | </span>
-                        <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+                        {% if is_granted('ROLE_ADMIN') or app.user.id == coordinate.user.id %}
+                            <a href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}
@@ -40,6 +40,10 @@
             {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(coordinates_pager, 'twitter_bootstrap4') }}
     </div>
 
 {% endblock %}

@@ -27,7 +27,7 @@ class CoordinateRepository extends ServiceEntityRepository
         float $topRightLng,
         array $typeIds
     ) {
-        $query = 'SELECT id, name, address, latitude, longitude
+        $query = 'SELECT id, name, address, latitude, longitude, image_name AS imageName
                 from coordinate
                 where ? <= latitude AND latitude <= ?
                       and ? <= longitude AND longitude <= ?';

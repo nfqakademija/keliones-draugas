@@ -5,17 +5,15 @@
 {% block body %}
         <div class="container">
         <h1 class="m-4">{{ coordinate.name }}</h1>
-        {{ include('coordinate/_delete_form.html.twig') }}
+        {% if is_granted('ROLE_ADMIN') or app.user.id == coordinate.user.id %}
+            {{ include('coordinate/_delete_form.html.twig') }}
+        {% endif %}
 
 
         <img src="{{ vich_uploader_asset(coordinate, 'imageFile') }}" alt="{{ coordinate.imageName }}" />
 
         <table class="table">
             <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ coordinate.id }}</td>
-                </tr>
                 <tr>
                     <th>Title</th>
                     <td>{{ coordinate.name }}</td>
@@ -42,8 +40,9 @@
         </div>
 
         <a class="btn btn-primary m-3" href="{{ path('coordinate_index') }}">Back to list</a>
-        <a class="btn btn-primary m-3" href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
-
+        {% if is_granted('ROLE_ADMIN') or app.user.id == coordinate.user.id %}
+            <a class="btn btn-primary m-3" href="{{ path('coordinate_edit', {'id': coordinate.id}) }}">Edit</a>
+        {% endif %}
 
         <br><br>
         {% include '@FOSComment/Thread/async.html.twig' with {'id': coordinate.thread.id} %}

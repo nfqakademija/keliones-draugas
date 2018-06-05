@@ -10,15 +10,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Type</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-            {% for coordinate_type in coordinate_types %}
+            {% for coordinate_type in coordinate_type_pager.currentPageResults %}
                 <tr>
-                    <td>{{ coordinate_type.id }}</td>
                     <td>{{ coordinate_type.type }}</td>
                     <td>
                         <a href="{{ path('coordinate_type_show', {'id': coordinate_type.id}) }}">More</a>
@@ -34,4 +32,9 @@
         </table>
 
     </div>
+
+    <div class="pagerfanta">
+        {{ pagerfanta(coordinate_type_pager, 'twitter_bootstrap4') }}
+    </div>
+
 {% endblock %}

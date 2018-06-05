@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -10,9 +11,24 @@ use FOS\UserBundle\Model\User as BaseUser;
  */
 class User extends BaseUser
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+
+    /**
+     * @var Coordinate[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Coordinate", mappedBy="user")
+     */
+    private $coordinates;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->coordinates = new ArrayCollection();
 
         $this->roles = array('ROLE_USER');
     }
@@ -31,14 +47,38 @@ class User extends BaseUser
     {
         $this->roles = $roles;
     }
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    protected $id;
+
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * @return Coordinate[]
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * @param Coordinate[] $coordinates
+     * @return User
+     */
+    public function setCoordinates(array $coordinates): User
+    {
+        $this->coordinates = $coordinates;
+        return $this;
+    }
+
+    public function addCoordinate(Coordinate $coordinate)
+    {
+        $this->coordinates->add($coordinate);
+        return $this;
+    }
+
+    public function removeCoordinate(Coordinate $coordinate)
+    {
+        $this->coordinates->removeElement($coordinate);
+        return $this;
     }
 }

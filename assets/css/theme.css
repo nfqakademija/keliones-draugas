@@ -77,18 +77,20 @@ html, body {
     }
 }
 
+#coordinate_imageFile_file{
+    opacity: unset;
+}
 #directions > section {
     padding: 0 0;
 }
-
 #directions > section > ul {
     margin-bottom: 0;
 }
 
 .info-window{
     text-align: center;
-}
 
+}
 #point{
     border: none;
     background-color: #FF9F1C;

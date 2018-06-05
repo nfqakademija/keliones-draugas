@@ -89,4 +89,13 @@ html, body {
 
 .info-window{
     text-align: center;
+
+}
+#point{
+    border: none;
+    background-color: #FF9F1C;
+}
+
+.gm-style img{
+    margin-top: 5px;
 }
